@@ -23,9 +23,14 @@ public class Player : MonoBehaviour
     private Quaternion CameraRotation = Quaternion.Euler(0, 0, 0);
     private float CameraDistance;//カメラとプレイヤーの距離
 
+    Rigidbody rb;
+
     void Start()
     {
+        rb = this.gameObject.GetComponent<Rigidbody>();
+
         this.transform.position = new Vector3(0, PlayerminY, 5);
+        CameraAxis.transform.position = this.transform.position;
         Camera.transform.position = this.transform.position + CameraPosition;
         Camera.transform.rotation = CameraRotation;
         CameraDistance = Vector3.Distance(this.transform.position, Camera.transform.position);
@@ -49,7 +54,7 @@ public class Player : MonoBehaviour
     {
         Vector3 dir = Vector3.zero;
         Vector3 vel = Vector3.zero;
-        GetComponent<Rigidbody>().velocity = new Vector3(0, GetComponent<Rigidbody>().velocity.y, 0);
+        rb.velocity = new Vector3(0, rb.velocity.y, 0);
 
         if (Input.GetKey(KeyCode.W))
         {
@@ -87,7 +92,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Mathf.Abs(this.transform.position.x) >= ObjectSizeData.floor - ObjectSizeData.Player)
+        if (Mathf.Abs(this.transform.position.x) >= ObjectSizeData.floorX - ObjectSizeData.Player)
         {
             if (this.transform.position.x * dir.x > 0)//現在の座標(x)と移動方向(x)が同符号だったら
             {
@@ -96,7 +101,7 @@ public class Player : MonoBehaviour
         }
 
         vel = dir;
-        GetComponent<Rigidbody>().velocity = new Vector3((vel * PlayerSpeed * Time.deltaTime).x, GetComponent<Rigidbody>().velocity.y, (vel * PlayerSpeed * Time.deltaTime).z);//キーによる合成ベクトルの方向へ速さPlayerSpeed
+        rb.velocity = new Vector3((vel * PlayerSpeed * Time.deltaTime).x, rb.velocity.y, (vel * PlayerSpeed * Time.deltaTime).z);//キーによる合成ベクトルの方向へ速さPlayerSpeed
 
     }
 
@@ -122,45 +127,38 @@ public class Player : MonoBehaviour
         CameraAxis.transform.eulerAngles = new Vector3(AngleY, AngleX, 0);
 
         int CameraLimitSpeed = 30;//カメラ位置制御時の速度
-
-        if (Camera.transform.position.z <= 0)//z方向
+        if (Mathf.Abs(Camera.transform.position.x) > 5.0f || Camera.transform.position.z < 0) //x方向
         {
             Camera.transform.position += Camera.transform.forward * CameraLimitSpeed * Time.deltaTime;
         }
-        if (Vector3.Distance(this.transform.position, Camera.transform.position) < CameraDistance && GetComponent<Rigidbody>().velocity.z > 0)
+        else if (Vector3.Distance(this.transform.position, Camera.transform.position) < CameraDistance && (Mathf.Abs(Camera.transform.position.x) < 5.0f || Camera.transform.position.z > 0))
         {
-            if (Camera.transform.position.z >= 0)
+            if (mouseInputX != 0 || mouseInputY != 0 || rb.velocity != Vector3.zero)
             {
                 Camera.transform.position -= Camera.transform.forward * CameraLimitSpeed * Time.deltaTime;
+                Debug.Log(rb.velocity.x);
             }
         }
 
 
 
-        if (Mathf.Abs(Camera.transform.position.x) >= 5.0f) //x方向
-        {
-            Camera.transform.position += Camera.transform.forward * CameraLimitSpeed * Time.deltaTime;
-        }
-
-        if (Vector3.Distance(this.transform.position, Camera.transform.position) < CameraDistance && GetComponent<Rigidbody>().velocity.x * Camera.transform.position.x < 0)//プレイヤーがカメラと逆方向へ動いたら(x)
-        {
-            Camera.transform.position -= Camera.transform.forward * CameraLimitSpeed * Time.deltaTime;
-        }
     }
 
     private void Jump()
     {
+
+
         if (this.transform.position.y <= PlayerminY)//地上
         {
-            this.GetComponent<Rigidbody>().velocity = new Vector3(this.GetComponent<Rigidbody>().velocity.x, 0, this.GetComponent<Rigidbody>().velocity.z);
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             if (Input.GetKey(KeyCode.Space))
             {
-                this.GetComponent<Rigidbody>().velocity = new Vector3(this.GetComponent<Rigidbody>().velocity.x, PlayerJumpPower, this.GetComponent<Rigidbody>().velocity.z);
+                rb.velocity = new Vector3(rb.velocity.x, PlayerJumpPower, rb.velocity.z);
             }
         }
         else//空中
         {
-            this.GetComponent<Rigidbody>().velocity -= new Vector3(0, Gravity, 0) * Time.deltaTime;
+            rb.velocity -= new Vector3(0, Gravity, 0) * Time.deltaTime;
         }
     }
 }
