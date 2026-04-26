@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.UIElements;
@@ -10,7 +12,7 @@ public class Player : MonoBehaviour
     private int PlayerminY = 1;
 
     //プレイヤーパラメータ
-    private int PlayerSpeed = 4000;
+    private int PlayerSpeed = 800;
     private int PlayerJumpPower = 30;
     private float Gravity = 150;
 
@@ -19,13 +21,14 @@ public class Player : MonoBehaviour
     public Transform Camera;
     private Vector3 CameraPosition = new Vector3(0, 0.5f, -5);
     private Quaternion CameraRotation = Quaternion.Euler(0, 0, 0);
-
+    private float CameraDistance;//カメラとプレイヤーの距離
 
     void Start()
     {
-        this.transform.position = new Vector3(0, PlayerminY, 0);
+        this.transform.position = new Vector3(0, PlayerminY, 5);
         Camera.transform.position = this.transform.position + CameraPosition;
         Camera.transform.rotation = CameraRotation;
+        CameraDistance = Vector3.Distance(this.transform.position, Camera.transform.position);
     }
 
     // Update is called once per frame
@@ -117,6 +120,32 @@ public class Player : MonoBehaviour
         AngleY = Mathf.Clamp(AngleY, AngleYmin, AngleYmax);
 
         CameraAxis.transform.eulerAngles = new Vector3(AngleY, AngleX, 0);
+
+        int CameraLimitSpeed = 30;//カメラ位置制御時の速度
+
+        if (Camera.transform.position.z <= 0)//z方向
+        {
+            Camera.transform.position += Camera.transform.forward * CameraLimitSpeed * Time.deltaTime;
+        }
+        if (Vector3.Distance(this.transform.position, Camera.transform.position) < CameraDistance && GetComponent<Rigidbody>().velocity.z > 0)
+        {
+            if (Camera.transform.position.z >= 0)
+            {
+                Camera.transform.position -= Camera.transform.forward * CameraLimitSpeed * Time.deltaTime;
+            }
+        }
+
+
+
+        if (Mathf.Abs(Camera.transform.position.x) >= 5.0f) //x方向
+        {
+            Camera.transform.position += Camera.transform.forward * CameraLimitSpeed * Time.deltaTime;
+        }
+
+        if (Vector3.Distance(this.transform.position, Camera.transform.position) < CameraDistance && GetComponent<Rigidbody>().velocity.x * Camera.transform.position.x < 0)//プレイヤーがカメラと逆方向へ動いたら(x)
+        {
+            Camera.transform.position -= Camera.transform.forward * CameraLimitSpeed * Time.deltaTime;
+        }
     }
 
     private void Jump()
