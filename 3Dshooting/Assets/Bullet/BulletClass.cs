@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class BulletClass : MonoBehaviour
 {
+    public float downSpeed;
 
     public Vector3 StartPosition;
 
     public float BulletSize;//半径
     public float BulletSpeed;
-    float AbsoluteOfAccel = 3.0f;
-    Vector3 BulletVelocity;
+    float AbsoluteOfAccel = 50;
+    public Vector3 BulletVelocity;
     Vector3 accelaration;
 
-    Transform Player;
+    public Transform Player;
 
 
     public void SetUp()
@@ -23,12 +24,16 @@ public class BulletClass : MonoBehaviour
         this.transform.localScale = new Vector3(BulletSize, BulletSize, BulletSize);
     }
 
-    public void move()
+    public void homingMove()
     {
-        //accelaration = Player.transform.position - this.transform.position;
-        //rb.velocity += accelaration.normalized * AbsoluteOfAccel * Time.deltaTime;
-        this.transform.position += new Vector3(0, 0, -BulletSpeed) * Time.deltaTime;
-        Debug.Log("移動中");
+        if(this.transform.position.z > Player.transform.position.z)//後ろから追尾はしない　プレイヤーを越したら落下するだけ
+        {
+            accelaration = new Vector3(Player.transform.position.x - this.transform.position.x, 0, Player.transform.position.z - this.transform.position.z).normalized;
+        }
+        accelaration = new Vector3(accelaration.x, -downSpeed, accelaration.z);//y軸には常に落下させたい
+        BulletVelocity = BulletVelocity.normalized + accelaration * AbsoluteOfAccel * Time.deltaTime;
+        //Debug.Log(BulletVelocity.y)
+        this.transform.position += BulletVelocity.normalized * BulletSpeed * Time.deltaTime;
     }
     
     public void disApp()//消す

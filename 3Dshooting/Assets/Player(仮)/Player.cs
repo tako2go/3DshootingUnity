@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private int PlayerminY = 1;
 
     //プレイヤーパラメータ
-    private int PlayerSpeed = 800;
+    private int PlayerSpeed = 8;
     private int PlayerJumpPower = 30;
     private float Gravity = 150;
 
@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
         }
 
         vel = dir;
-        rb.velocity = new Vector3((vel * PlayerSpeed * Time.deltaTime).x, rb.velocity.y, (vel * PlayerSpeed * Time.deltaTime).z);//キーによる合成ベクトルの方向へ速さPlayerSpeed
+        rb.velocity = new Vector3((vel * PlayerSpeed).x, rb.velocity.y, (vel * PlayerSpeed).z);//キーによる合成ベクトルの方向へ速さPlayerSpeed
 
     }
 
@@ -116,7 +116,7 @@ public class Player : MonoBehaviour
         float mouseInputX = Input.GetAxis("Mouse X");
         float mouseInputY = Input.GetAxis("Mouse Y");
 
-        const int AngleYmin = -17;
+        const int AngleYmin = -47;
         const int AngleYmax = 30;
 
         AngleX += mouseInputX * RotateSpeed * Time.deltaTime;
@@ -127,18 +127,18 @@ public class Player : MonoBehaviour
         CameraAxis.transform.eulerAngles = new Vector3(AngleY, AngleX, 0);
 
         int CameraLimitSpeed = 30;//カメラ位置制御時の速度
-        if (Mathf.Abs(Camera.transform.position.x) > 5.0f || Camera.transform.position.z < 0) //x方向
+        if (Mathf.Abs(Camera.transform.position.x) > ObjectSizeData.floorX || Camera.transform.position.z < 0 || Camera.transform.position.y < 0) //x方向
         {
             Camera.transform.position += Camera.transform.forward * CameraLimitSpeed * Time.deltaTime;
         }
-        else if (Vector3.Distance(this.transform.position, Camera.transform.position) < CameraDistance && (Mathf.Abs(Camera.transform.position.x) < 5.0f || Camera.transform.position.z > 0))
+        else if (Vector3.Distance(this.transform.position, Camera.transform.position) < CameraDistance && (Mathf.Abs(Camera.transform.position.x) < ObjectSizeData.floorX  || Camera.transform.position.z > 0 || Camera.transform.position.y > 0))
         {
             if (mouseInputX != 0 || mouseInputY != 0 || rb.velocity != Vector3.zero)
             {
                 Camera.transform.position -= Camera.transform.forward * CameraLimitSpeed * Time.deltaTime;
-                Debug.Log(rb.velocity.x);
-            }
+            //Debug.Log(rb.velocity.x);
         }
+    }
 
 
 

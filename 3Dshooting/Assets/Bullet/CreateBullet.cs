@@ -7,10 +7,6 @@ public class CreateBullet : MonoBehaviour
     // Start is called before the first frame update
     public GameObject Nomalbullet;
     float timer  = 0;
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
