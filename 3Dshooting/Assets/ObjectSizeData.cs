@@ -10,5 +10,5 @@ public static class ObjectSizeData
     public static float floorY = 100.0f;
 
     public static float NomalBulletMax = 2.0f;
-    public static float NomalBulletMin = 0.2f;
+    public static float NomalBulletMin = 0.8f;
 }

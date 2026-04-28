@@ -10,7 +10,7 @@ public class BulletClass : MonoBehaviour
 
     public float BulletSize;//半径
     public float BulletSpeed;
-    float AbsoluteOfAccel = 50;
+    public float AbsoluteOfAccel;
     public Vector3 BulletVelocity;
     Vector3 accelaration;
 
@@ -26,11 +26,18 @@ public class BulletClass : MonoBehaviour
 
     public void homingMove()
     {
-        if(this.transform.position.z > Player.transform.position.z)//後ろから追尾はしない　プレイヤーを越したら落下するだけ
+        const float nonHomingArea = 2.0f;
+        //if(this.transform.position.z > Player.transform.position.z)//後ろから追尾はしない　プレイヤーを越したら落下するだけ
+        //{
+        if(Mathf.Abs(this.transform.position.z - Player.transform.position.z) != -1)
         {
-            accelaration = new Vector3(Player.transform.position.x - this.transform.position.x, 0, Player.transform.position.z - this.transform.position.z).normalized;
+                if(Mathf.Abs(this.transform.position.z - Player.transform.position.z) > nonHomingArea)//追尾させすぎると必ず当たってしまうため範囲を設ける
+                {
+                    AbsoluteOfAccel = 1.5f / (Mathf.Abs(this.transform.position.z - Player.transform.position.z) - 1f);
+                }
         }
-        accelaration = new Vector3(accelaration.x, -downSpeed, accelaration.z);//y軸には常に落下させたい
+
+        accelaration = (Player.transform.position - this.transform.position) * AbsoluteOfAccel;
         BulletVelocity = BulletVelocity.normalized + accelaration * AbsoluteOfAccel * Time.deltaTime;
         //Debug.Log(BulletVelocity.y)
         this.transform.position += BulletVelocity.normalized * BulletSpeed * Time.deltaTime;
