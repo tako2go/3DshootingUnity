@@ -26,6 +26,10 @@ public class NomalBullet : BulletClass
     void Update()
     {
         homingMove();
-        disApp();
+        hit();
+        if (this.transform.position.y <= 0 || this.transform.position.z <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

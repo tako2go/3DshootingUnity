@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
 
 
 
-        if ((this.transform.position.z) <= 0 + ObjectSizeData.Player)//ˆÚ“®”ÍˆÍ§ŒÀ
+        if ((this.transform.position.z) <= 0 + ObjectSizeData.playerRadius)//ˆÚ“®”ÍˆÍ§ŒÀ
         {
             if (dir.z < 0)
             {
@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Mathf.Abs(this.transform.position.x) >= ObjectSizeData.floorX - ObjectSizeData.Player)
+        if (Mathf.Abs(this.transform.position.x) >= ObjectSizeData.floorX - ObjectSizeData.playerRadius)
         {
             if (this.transform.position.x * dir.x > 0)//Œ»İ‚ÌÀ•W(x)‚ÆˆÚ“®•ûŒü(x)‚ª“¯•„†‚¾‚Á‚½‚ç
             {

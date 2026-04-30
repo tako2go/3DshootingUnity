@@ -27,8 +27,6 @@ public class BulletClass : MonoBehaviour
     public void homingMove()
     {
         const float nonHomingArea = 2.0f;
-        //if(this.transform.position.z > Player.transform.position.z)//後ろから追尾はしない　プレイヤーを越したら落下するだけ
-        //{
         if(Mathf.Abs(this.transform.position.z - Player.transform.position.z) != -1)
         {
                 if(Mathf.Abs(this.transform.position.z - Player.transform.position.z) > nonHomingArea)//追尾させすぎると必ず当たってしまうため範囲を設ける
@@ -39,15 +37,18 @@ public class BulletClass : MonoBehaviour
 
         accelaration = (Player.transform.position - this.transform.position) * AbsoluteOfAccel;
         BulletVelocity = BulletVelocity.normalized + accelaration * AbsoluteOfAccel * Time.deltaTime;
-        //Debug.Log(BulletVelocity.y)
         this.transform.position += BulletVelocity.normalized * BulletSpeed * Time.deltaTime;
     }
-    
-    public void disApp()//消す
+
+    public void hit()
     {
-        if(this.transform.position.y <= 0 || this.transform.position.z <= 0)
+        if(Mathf.Abs(this.transform.position.y - Player.transform.position.y) <= ObjectSizeData.playerHeight)
         {
-            Destroy(this.gameObject);
+            if (Vector2.Distance(new Vector2(this.transform.position.x, this.transform.position.z), new Vector2(Player.transform.position.x, Player.transform.position.z)) <= BulletSize + ObjectSizeData.playerRadius)
+            {
+                Debug.Log("hit");
+                Destroy(this.gameObject);
+            }
         }
     }
 }
