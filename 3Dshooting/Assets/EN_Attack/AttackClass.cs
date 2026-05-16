@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,15 +20,14 @@ public class AttackClass : MonoBehaviour
 
     public void SetUp()
     {
-        Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        Enemy = GameObject.FindWithTag("Enemy").GetComponent<Transform>();
         this.transform.position = StartPosition;
         this.transform.localScale = new Vector3(BulletSize, BulletSize, BulletSize);
     }
 
     public void nomalMove()
     {
-        this.transform.position += BulletVelocity;
+        this.transform.position += BulletVelocity * Time.deltaTime;
+        Debug.Log(BulletVelocity.z);
     }
 
     public void homingMove()

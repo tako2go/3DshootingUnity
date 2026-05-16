@@ -9,8 +9,8 @@ public class HomingBullet : AttackClass
 
     void Start()
     {
-        SetUp();
-        // StartPosition = new Vector3(Random.Range(-ObjectSizeData.floorX,ObjectSizeData.floorX), Random.Range(0,10),ObjectSizeData.floorY * 2 - 50);
+        Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        Enemy = GameObject.FindWithTag("Enemy").GetComponent<Transform>();
 
         StartPosition = Enemy.transform.position;
         BulletSize = Random.Range(ObjectSizeData.NomalBulletMin, ObjectSizeData.NomalBulletMax);
