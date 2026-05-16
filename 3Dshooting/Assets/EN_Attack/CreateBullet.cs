@@ -5,8 +5,8 @@ using UnityEngine;
 public class CreateBullet : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject Nomalbullet;
-    float timer  = 0;
+    public GameObject HomingBullet;
+    float timer = 0;
 
     // Update is called once per frame
     void Update()
@@ -14,7 +14,7 @@ public class CreateBullet : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= 3.0f)
         {
-            Instantiate(Nomalbullet);
+            Instantiate(HomingBullet);
             timer = 0;
         }
     }
