@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class HomingBullet : AttackClass
+public class HomingBullet : EN_AttackClass
 {
 
     void Start()
@@ -12,7 +12,6 @@ public class HomingBullet : AttackClass
         Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         Enemy = GameObject.FindWithTag("Enemy").GetComponent<Transform>();
 
-        StartPosition = Enemy.transform.position;
         BulletSize = Random.Range(ObjectSizeData.NomalBulletMin, ObjectSizeData.NomalBulletMax);
 
         BulletSpeed = Random.Range(50, 100);

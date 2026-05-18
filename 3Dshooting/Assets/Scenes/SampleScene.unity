@@ -806,6 +806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcb8abe5e882cab4dbf73a9cf02c5c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NomalBullet: {fileID: 1075116321227960717, guid: 643b15045091aa24f8c387f65a46393e, type: 3}
   HomingBullet: {fileID: 7757236770014804076, guid: 273d53bd327745040905968ef124deac, type: 3}
 --- !u!4 &1586598362
 Transform:

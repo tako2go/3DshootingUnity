@@ -3,12 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackClass : MonoBehaviour
+public class EN_AttackClass : MonoBehaviour
 {
     public float downSpeed;
-
-    public Vector3 StartPosition;
-
     public float BulletSize;//半径
     public float BulletSpeed;
     public float AbsoluteOfAccel;
@@ -20,7 +17,6 @@ public class AttackClass : MonoBehaviour
 
     public void SetUp()
     {
-        this.transform.position = StartPosition;
         this.transform.localScale = new Vector3(BulletSize, BulletSize, BulletSize);
     }
 

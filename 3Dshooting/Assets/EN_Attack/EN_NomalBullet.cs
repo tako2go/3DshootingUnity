@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NomalBullet : AttackClass
+public class EN_NomalBullet : EN_AttackClass
 {
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         Enemy = GameObject.FindWithTag("Enemy").GetComponent<Transform>();
-        StartPosition = Enemy.transform.position;
         BulletSize = Random.Range(ObjectSizeData.NomalBulletMin, ObjectSizeData.NomalBulletMax);
         BulletSpeed = Random.Range(50, 100);
-        BulletVelocity = (Player.transform.position - StartPosition).normalized * BulletSpeed;//この時点でthis.transform.positionは正式な値になっていないためStartPositionを使用
+        BulletVelocity = (Player.transform.position - this.transform.position).normalized * BulletSpeed;
         SetUp();
     }
 

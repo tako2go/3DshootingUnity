@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreateBullet : MonoBehaviour
+public class EN_CreateBullet : MonoBehaviour
 {
     // Start is called before the first frame update
+    public Transform Enemy;
     public GameObject NomalBullet;
     public GameObject HomingBullet;
     float timer = 0;
@@ -15,7 +16,7 @@ public class CreateBullet : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= 3.0f)
         {
-            Instantiate(NomalBullet);
+            Instantiate(NomalBullet, Enemy.transform.position, Quaternion.identity);
             timer = 0;
         }
     }
