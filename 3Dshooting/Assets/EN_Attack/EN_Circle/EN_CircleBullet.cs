@@ -5,6 +5,7 @@ using UnityEngine;
 public class EN_CircleBullet : EN_NomalBullet
 {
     // Start is called before the first frame update
+    public bool shot;
     protected override void Start()
     {
         base.Start();
@@ -13,7 +14,10 @@ public class EN_CircleBullet : EN_NomalBullet
     // Update is called once per frame
     void Update()
     {
-        nomalMove();
-        Bullethit();
+        if (shot)
+        {
+            nomalMove();
+            Bullethit();
+        }
     }
 }

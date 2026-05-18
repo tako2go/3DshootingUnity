@@ -16,6 +16,9 @@ public static class NumericalData
     // public static float NomalBulletMin = 0.8f;
     public static float BulletSize = 1.0f;
 
-    public static float CreateInterval = 3f;
+    //Circle関係
+    public static float CircleCreateInterval = 3f;
+    public static float CircleShotInterval = 1f;
     public static float CircleRadius = 10.0f;
+    public static int CircleBulletNum = 12;
 }

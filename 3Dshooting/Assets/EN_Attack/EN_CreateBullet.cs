@@ -37,10 +37,13 @@ public class EN_CreateBullet : MonoBehaviour
     IEnumerator CreateCircle()
     {
         GameObject Parent = new GameObject("CircleParent");
-        for (int i = 0; i < 12; i++)
+        EN_CircleBullet_Parent ParentScript = Parent.AddComponent<EN_CircleBullet_Parent>();
+
+        for (int i = 0; i < NumericalData.CircleBulletNum; i++)
         {
-            Instantiate(CircleBullet, new Vector3(Enemy.transform.position.x + NumericalData.CircleRadius * Mathf.Cos(-(i * NumericalData.PIE * 2 / 12) + NumericalData.PIE / 2), Enemy.transform.position.x + NumericalData.CircleRadius * Mathf.Sin(-(i * NumericalData.PIE * 2 / 12) + NumericalData.PIE / 2), Enemy.transform.position.z), Quaternion.identity, Parent.transform);
-            yield return new WaitForSeconds(NumericalData.CreateInterval);
+            ParentScript.Bullets[i] = Instantiate(CircleBullet, new Vector3(Enemy.transform.position.x + NumericalData.CircleRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * NumericalData.CircleBulletNum)) + NumericalData.PIE / 2), Enemy.transform.position.x + NumericalData.CircleRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * NumericalData.CircleBulletNum)) + NumericalData.PIE / 2), Enemy.transform.position.z), Quaternion.identity, Parent.transform);
+            yield return new WaitForSeconds(NumericalData.CircleCreateInterval);
         }
+        ParentScript.StartShot = true;
     }
 }
