@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
         }
 
 
-        if (Mathf.Abs(this.transform.position.x) >= (ObjectSizeData.MoveBoxX / 2) - ObjectSizeData.playerRadius)
+        if (Mathf.Abs(this.transform.position.x) >= (NumericalData.MoveBoxX / 2) - NumericalData.playerRadius)
         {
             if (this.transform.position.x * dir.x > 0)//中心に対して右、左としたとき、速度方向(x)と現在位置の左右が同じだった場合停止
             {
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Mathf.Abs(this.transform.position.z) >= (ObjectSizeData.MoveBoxZ / 2) - ObjectSizeData.playerRadius)//�ړ��͈͐���
+        if (Mathf.Abs(this.transform.position.z) >= (NumericalData.MoveBoxZ / 2) - NumericalData.playerRadius)//�ړ��͈͐���
         {
             if (this.transform.position.z * dir.z > 0)
             {
@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Mathf.Abs(this.transform.position.y) >= (ObjectSizeData.MoveBoxY / 2) - ObjectSizeData.playerHeight)//�ړ��͈͐���
+        if (Mathf.Abs(this.transform.position.y) >= (NumericalData.MoveBoxY / 2) - NumericalData.playerHeight)//�ړ��͈͐���
         {
             if (this.transform.position.y * dir.y > 0)
             {

@@ -12,7 +12,7 @@ public class HomingBullet : EN_AttackClass
         Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         Enemy = GameObject.FindWithTag("Enemy").GetComponent<Transform>();
 
-        BulletSize = Random.Range(ObjectSizeData.NomalBulletMin, ObjectSizeData.NomalBulletMax);
+        // BulletSize = Random.Range(ObjectSizeData.NomalBulletMin, ObjectSizeData.NomalBulletMax);
 
         BulletSpeed = Random.Range(50, 100);
         BulletVelocity = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(0.2f, 0.25f), Random.Range(-2, -1)).normalized * BulletSpeed;
@@ -25,7 +25,7 @@ public class HomingBullet : EN_AttackClass
     {
         homingMove();
         Bullethit();
-        if (this.transform.position.y <= -ObjectSizeData.MoveBoxY / 2 || this.transform.position.z <= -ObjectSizeData.MoveBoxZ / 2)
+        if (this.transform.position.y <= -NumericalData.MoveBoxY / 2 || this.transform.position.z <= -NumericalData.MoveBoxZ / 2)
         {
             Destroy(this.gameObject);
         }

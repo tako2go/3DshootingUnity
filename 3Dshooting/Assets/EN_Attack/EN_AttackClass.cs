@@ -23,7 +23,6 @@ public class EN_AttackClass : MonoBehaviour
     public void nomalMove()
     {
         this.transform.position += BulletVelocity * Time.deltaTime;
-        Debug.Log(BulletVelocity.z);
     }
 
     public void homingMove()
@@ -36,11 +35,11 @@ public class EN_AttackClass : MonoBehaviour
 
     public void Bullethit()
     {
-        if (Mathf.Abs(this.transform.position.y - Player.transform.position.y) <= ObjectSizeData.playerHeight)
+        if (Mathf.Abs(this.transform.position.y - Player.transform.position.y) <= NumericalData.playerHeight)
         {
-            if (Vector2.Distance(new Vector2(this.transform.position.x, this.transform.position.z), new Vector2(Player.transform.position.x, Player.transform.position.z)) <= BulletSize + ObjectSizeData.playerRadius)
+            if (Vector2.Distance(new Vector2(this.transform.position.x, this.transform.position.z), new Vector2(Player.transform.position.x, Player.transform.position.z)) <= BulletSize + NumericalData.playerRadius)
             {
-                Debug.Log("hit");
+                // Debug.Log("hit");
                 Destroy(this.gameObject);
             }
         }
