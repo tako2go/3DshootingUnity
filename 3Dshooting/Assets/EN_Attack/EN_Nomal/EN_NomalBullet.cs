@@ -10,7 +10,7 @@ public class EN_NomalBullet : EN_AttackClass
         Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         Enemy = GameObject.FindWithTag("Enemy").GetComponent<Transform>();
         // BulletSize = Random.Range(ObjectSizeData.NomalBulletMin, ObjectSizeData.NomalBulletMax);
-        BulletSize = NumericalData.BulletSize;
+        BulletSize = NumericalData.EN_BulletSize;
         BulletSpeed = Random.Range(50, 100);
         BulletVelocity = (Player.transform.position - this.transform.position).normalized * BulletSpeed;
         SetUp();

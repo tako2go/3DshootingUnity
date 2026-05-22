@@ -8,26 +8,27 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
-    //playerプロパティ
-    private int PlayerSpeed = 8;
-    private float Gravity = 150;
 
     //Cameraプロパティ
-    public Transform CameraAxis;
-    public Transform Camera;
-    private Vector3 CameraPosition = new Vector3(0, 0.5f, -5);
+    public Transform CameraAxisTf;
+    public Transform CameraTf;
+
     private Quaternion CameraRotation = Quaternion.Euler(0, 0, 0);
 
     Rigidbody rb;
+
+    //攻撃関係
+    private float shotTimer = NumericalData.PL_shotInterVal;//スタート時点で発射できるようにするため
+    public GameObject PlayerBullet;
 
     void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
 
         this.transform.position = new Vector3(0, 0, 0);
-        CameraAxis.transform.position = this.transform.position;
-        Camera.transform.position = this.transform.position + CameraPosition;
-        Camera.transform.rotation = CameraRotation;
+        CameraAxisTf.transform.position = this.transform.position;
+        CameraTf.transform.position = this.transform.position + NumericalData.CameraStartPosition;
+        CameraTf.transform.rotation = CameraRotation;
     }
 
     // Update is called once per frame
@@ -35,7 +36,10 @@ public class Player : MonoBehaviour
     {
         move();
         CamerapPos();
-
+        if (Input.GetMouseButton(1))
+        {
+            shot();
+        }
     }
 
 
@@ -47,19 +51,19 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            dir += Camera.transform.forward;
+            dir += CameraTf.transform.forward;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            dir -= Camera.transform.right;
+            dir -= CameraTf.transform.right;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            dir -= Camera.transform.forward;
+            dir -= CameraTf.transform.forward;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            dir += Camera.transform.right;
+            dir += CameraTf.transform.right;
         }
 
         if (Input.GetKey(KeyCode.Space))
@@ -73,10 +77,17 @@ public class Player : MonoBehaviour
 
         vel = dir.normalized;
 
-        if (dir.x != 0 || dir.z != 0)//xz平面において移動方向を向く
+        if (!Input.GetMouseButton(1))
         {
-            dir.y = 0;
-            transform.rotation = Quaternion.LookRotation(dir);
+            if (dir.x != 0 || dir.z != 0)//xz平面において移動方向を向く
+            {
+                dir.y = 0;
+                transform.rotation = Quaternion.LookRotation(dir);
+            }
+        }
+        else
+        {
+            transform.rotation = Quaternion.LookRotation(new Vector3(CameraTf.transform.forward.x, 0, CameraTf.transform.forward.z));
         }
 
 
@@ -100,13 +111,13 @@ public class Player : MonoBehaviour
         {
             if (this.transform.position.y * dir.y > 0)
             {
-                vel.z = 0;
+                vel.y = 0;
             }
         }
 
 
 
-        rb.velocity = vel.normalized * PlayerSpeed;
+        rb.velocity = vel.normalized * NumericalData.PlayerSpeed;
 
     }
 
@@ -114,7 +125,7 @@ public class Player : MonoBehaviour
     float AngleY = 0;
     private void CamerapPos()
     {
-        CameraAxis.transform.position = this.transform.position;
+        CameraAxisTf.transform.position = this.transform.position;
 
         const int RotateSpeed = 300;
 
@@ -129,6 +140,33 @@ public class Player : MonoBehaviour
 
         AngleY = Mathf.Clamp(AngleY, AngleYmin, AngleYmax);
 
-        CameraAxis.transform.eulerAngles = new Vector3(AngleY, AngleX, 0);
+        CameraAxisTf.transform.eulerAngles = new Vector3(AngleY, AngleX, 0);
+    }
+
+    private void shot()
+    {
+        GameObject Bullet;
+        Ray ray = new Ray(CameraTf.transform.position, CameraTf.transform.forward);
+        RaycastHit hit;
+
+        shotTimer += Time.deltaTime;
+        if (Input.GetMouseButton(0))
+        {
+            if (shotTimer >= NumericalData.PL_shotInterVal)
+            {
+                Vector3 BulletPos = new Vector3(transform.position.x, transform.position.y + NumericalData.playerHeight / 2, this.transform.position.z);
+                Bullet = Instantiate(PlayerBullet, BulletPos, Quaternion.identity);
+                if (Physics.Raycast(ray, out hit, 100f))//現在は適当な値100にしている　十分すぎるため余裕があったら修正
+                {
+                    Bullet.GetComponent<PL_Bullet>().vel = (hit.collider.gameObject.transform.position - BulletPos).normalized;
+                }
+                else
+                {
+                    Bullet.GetComponent<PL_Bullet>().vel = CameraTf.forward;//基本的にカメラに対してプレイヤーは下にいるため、微調整の値を足す
+                }
+
+                shotTimer = 0;
+            }
+        }
     }
 }
