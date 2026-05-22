@@ -7,7 +7,6 @@ public class EN_AttackClass : MonoBehaviour
 {
     public float downSpeed;
     public float BulletSize;//半径
-    public float BulletSpeed;
     public float AbsoluteOfAccel;
     public Vector3 BulletVelocity;
     Vector3 accelaration;
@@ -30,7 +29,7 @@ public class EN_AttackClass : MonoBehaviour
         AbsoluteOfAccel = Mathf.Pow(2, -Mathf.Abs(this.transform.position.z - Player.transform.position.z) + 6) + 1;//2^(-x＋〇)+〇
         accelaration = Player.transform.position - this.transform.position;
         BulletVelocity = BulletVelocity.normalized + accelaration.normalized * AbsoluteOfAccel * Time.deltaTime;
-        this.transform.position += BulletVelocity.normalized * BulletSpeed * Time.deltaTime;
+        this.transform.position += BulletVelocity.normalized * NumericalData.EN_BulletSpeed * Time.deltaTime;
     }
 
     public void Bullethit()

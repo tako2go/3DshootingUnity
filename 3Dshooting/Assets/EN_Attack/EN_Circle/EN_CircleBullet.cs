@@ -19,5 +19,6 @@ public class EN_CircleBullet : EN_NomalBullet
             nomalMove();
             Bullethit();
         }
+        Debug.Log(shot);
     }
 }

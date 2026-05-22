@@ -14,8 +14,7 @@ public class HomingBullet : EN_AttackClass
 
         // BulletSize = Random.Range(ObjectSizeData.NomalBulletMin, ObjectSizeData.NomalBulletMax);
 
-        BulletSpeed = Random.Range(50, 100);
-        BulletVelocity = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(0.2f, 0.25f), Random.Range(-2, -1)).normalized * BulletSpeed;
+        BulletVelocity = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(0.2f, 0.25f), Random.Range(-2, -1)).normalized * NumericalData.EN_BulletSpeed;
 
         SetUp();
     }

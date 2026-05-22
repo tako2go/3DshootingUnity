@@ -24,9 +24,13 @@ public class EN_CircleBullet_Parent : MonoBehaviour
 
     IEnumerator ShotCircle()
     {
+        EN_CircleBullet childBullet;
         for (int i = 0; i < NumericalData.CircleBulletNum; i++)
         {
-            Bullets[i].GetComponent<EN_CircleBullet>().shot = true;
+            childBullet = Bullets[i].GetComponent<EN_CircleBullet>();
+            childBullet.shot = true;
+            childBullet.BulletVelocity = (childBullet.Player.transform.position - Bullets[i].transform.position).normalized * NumericalData.EN_BulletSpeed;
+
             yield return new WaitForSeconds(NumericalData.CircleShotInterval);
         }
         Destroy(this.gameObject);
