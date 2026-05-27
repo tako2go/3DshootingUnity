@@ -30,6 +30,7 @@ public static class NumericalData
     public static float CircleRadius = 10.0f;
     public static int CircleBulletNum = 12;
 
+
     //プレイヤー攻撃関係
     public static float PL_shotInterVal = 0.1f;
     public static float PL_BulletSpeed = 50f;

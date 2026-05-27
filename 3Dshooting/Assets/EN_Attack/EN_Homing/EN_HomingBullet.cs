@@ -9,14 +9,8 @@ public class HomingBullet : EN_AttackClass
 
     void Start()
     {
-        Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        Enemy = GameObject.FindWithTag("Enemy").GetComponent<Transform>();
-
-        // BulletSize = Random.Range(ObjectSizeData.NomalBulletMin, ObjectSizeData.NomalBulletMax);
-
-        BulletVelocity = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(0.2f, 0.25f), Random.Range(-2, -1)).normalized * NumericalData.EN_BulletSpeed;
-
-        SetUp();
+        BulletStart(NumericalData.EN_BulletSize);
+        BulletVelocity = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(0.2f, 0.25f), Random.Range(-2, -1)).normalized * NumericalData.EN_BulletSpeed * Time.deltaTime;
     }
 
     // Update is called once per frame

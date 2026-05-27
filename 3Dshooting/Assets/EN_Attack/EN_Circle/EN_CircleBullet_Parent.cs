@@ -29,7 +29,7 @@ public class EN_CircleBullet_Parent : MonoBehaviour
         {
             childBullet = Bullets[i].GetComponent<EN_CircleBullet>();
             childBullet.shot = true;
-            childBullet.BulletVelocity = (childBullet.Player.transform.position - Bullets[i].transform.position).normalized * NumericalData.EN_BulletSpeed;
+            childBullet.BulletVelocity = (childBullet.Player.transform.position - Bullets[i].transform.position).normalized * NumericalData.EN_BulletSpeed * Time.deltaTime;
 
             yield return new WaitForSeconds(NumericalData.CircleShotInterval);
         }

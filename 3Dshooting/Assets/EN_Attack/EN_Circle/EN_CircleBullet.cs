@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EN_CircleBullet : EN_NomalBullet
+public class EN_CircleBullet : EN_AttackClass
 {
     // Start is called before the first frame update
     public bool shot;
-    protected override void Start()
+    void Start()
     {
-        base.Start();
+        BulletStart(NumericalData.EN_BulletSize);
     }
-
     // Update is called once per frame
     void Update()
     {

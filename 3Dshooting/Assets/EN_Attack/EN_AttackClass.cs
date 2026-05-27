@@ -14,14 +14,17 @@ public class EN_AttackClass : MonoBehaviour
     public Transform Player;
     public Transform Enemy;
 
-    public void SetUp()
+    public void BulletStart(float BulletSizeValue)
     {
-        this.transform.localScale = new Vector3(BulletSize, BulletSize, BulletSize);
+        Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        Enemy = GameObject.FindWithTag("Enemy").GetComponent<Transform>();
+        BulletSize = BulletSizeValue;
+        this.transform.localScale = new Vector3(BulletSizeValue, BulletSizeValue, BulletSizeValue);
     }
 
     public void nomalMove()
     {
-        this.transform.position += BulletVelocity * Time.deltaTime;
+        this.transform.position += BulletVelocity;
     }
 
     public void homingMove()

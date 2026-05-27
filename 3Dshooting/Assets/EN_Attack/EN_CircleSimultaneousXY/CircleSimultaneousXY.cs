@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EN_NomalBullet : EN_AttackClass
+public class CreateCircleSimultaneousXY : EN_AttackClass
 {
     // Start is called before the first frame update
     void Start()
     {
         BulletStart(NumericalData.EN_BulletSize);
-        BulletVelocity = (Player.transform.position - this.transform.position).normalized * NumericalData.EN_BulletSpeed * Time.deltaTime;
+        BulletVelocity = -transform.forward * NumericalData.EN_BulletSpeed * Time.deltaTime;
     }
 
     // Update is called once per frame

@@ -12,16 +12,18 @@ public class EN_CreateBullet : MonoBehaviour
     public GameObject NomalBullet;
     public GameObject HomingBullet;
     public GameObject CircleBullet;
+    public GameObject CircleSimBullet;
 
     // Update is called once per frame
     bool Flag = false;
+    float timer = 0;
     void Update()
     {
-
-        if (!Flag)
+        timer += Time.deltaTime;
+        if (timer >= 3.0f)
         {
-            StartCoroutine(CreateCircle());
-            Flag = true;
+            CreateCircleSimultaneousXY(10, 12);
+            timer = 0;
         }
     }
 
@@ -34,14 +36,23 @@ public class EN_CreateBullet : MonoBehaviour
         Instantiate(HomingBullet, Enemy.transform.position, Quaternion.identity);
     }
 
+    void CreateCircleSimultaneousXY(float CircleSimRadius, int CircleSimBulletNum)
+    {
+        for (int i = 0; i < CircleSimBulletNum; i++)
+        {
+            GameObject Bullet;
+            Bullet = Instantiate(CircleSimBullet, new Vector3(Enemy.transform.position.x + CircleSimRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), Enemy.transform.position.x + CircleSimRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), Enemy.transform.position.z), Quaternion.identity);
+        }
+    }
+
     IEnumerator CreateCircle()
     {
-        GameObject Parent = new GameObject("CircleParent");
-        EN_CircleBullet_Parent ParentScript = Parent.AddComponent<EN_CircleBullet_Parent>();
+        GameObject CircleParent = new GameObject("CircleParent");
+        EN_CircleBullet_Parent ParentScript = CircleParent.AddComponent<EN_CircleBullet_Parent>();
 
         for (int i = 0; i < NumericalData.CircleBulletNum; i++)
         {
-            ParentScript.Bullets[i] = Instantiate(CircleBullet, new Vector3(Enemy.transform.position.x + NumericalData.CircleRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * NumericalData.CircleBulletNum)) + NumericalData.PIE / 2), Enemy.transform.position.x + NumericalData.CircleRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * NumericalData.CircleBulletNum)) + NumericalData.PIE / 2), Enemy.transform.position.z), Quaternion.identity, Parent.transform);
+            ParentScript.Bullets[i] = Instantiate(CircleBullet, new Vector3(Enemy.transform.position.x + NumericalData.CircleRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * NumericalData.CircleBulletNum)) + NumericalData.PIE / 2), Enemy.transform.position.x + NumericalData.CircleRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * NumericalData.CircleBulletNum)) + NumericalData.PIE / 2), Enemy.transform.position.z), Quaternion.identity, CircleParent.transform);
             yield return new WaitForSeconds(NumericalData.CircleCreateInterval);
         }
         ParentScript.StartShot = true;
