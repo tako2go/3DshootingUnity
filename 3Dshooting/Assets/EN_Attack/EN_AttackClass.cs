@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class EN_AttackClass : MonoBehaviour
 {
-    public float downSpeed;
     public float BulletSize;//半径
     public float AbsoluteOfAccel;
     public Vector3 BulletVelocity;

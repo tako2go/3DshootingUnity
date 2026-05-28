@@ -13,18 +13,19 @@ public class EN_CreateBullet : MonoBehaviour
     public GameObject HomingBullet;
     public GameObject CircleBullet;
     public GameObject CircleSimBullet;
-
+    public GameObject CircleWaveBullet;
     // Update is called once per frame
     bool Flag = false;
     float timer = 0;
+
+    void Start()
+    {
+        StartCoroutine(CreateCircleWave(30));
+    }
+
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= 3.0f)
-        {
-            CreateCircleSimultaneousXY(10, 12);
-            timer = 0;
-        }
+
     }
 
     void CreateNomal()
@@ -56,5 +57,14 @@ public class EN_CreateBullet : MonoBehaviour
             yield return new WaitForSeconds(NumericalData.CircleCreateInterval);
         }
         ParentScript.StartShot = true;
+    }
+
+    IEnumerator CreateCircleWave(int CircleWaveBulletNum)
+    {
+        for (int i = 0; i < CircleWaveBulletNum; i++)
+        {
+            Instantiate(CircleWaveBullet, Enemy.transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(NumericalData.CircleWaveCreateInterval);
+        }
     }
 }

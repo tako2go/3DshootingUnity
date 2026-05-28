@@ -8,7 +8,7 @@ public class CreateCircleSimultaneousXY : EN_AttackClass
     void Start()
     {
         BulletStart(NumericalData.EN_BulletSize);
-        BulletVelocity = -transform.forward * NumericalData.EN_BulletSpeed * Time.deltaTime;
+        BulletVelocity = -this.transform.forward * NumericalData.EN_BulletSpeed * Time.deltaTime;
     }
 
     // Update is called once per frame

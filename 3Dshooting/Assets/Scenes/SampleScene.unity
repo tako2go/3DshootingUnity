@@ -976,6 +976,7 @@ MonoBehaviour:
   HomingBullet: {fileID: 7757236770014804076, guid: 273d53bd327745040905968ef124deac, type: 3}
   CircleBullet: {fileID: 8716638763702787929, guid: 29988a36dbed3bc4f9ac07ff011fee9a, type: 3}
   CircleSimBullet: {fileID: 8716638763702787929, guid: eddf5c9090405df4690ef95aab9aa309, type: 3}
+  CircleWaveBullet: {fileID: 8716638763702787929, guid: 8f1f02b1f753d014289571ec6e186aa9, type: 3}
 --- !u!4 &1586598362
 Transform:
   m_ObjectHideFlags: 0
