@@ -22,7 +22,7 @@ public static class NumericalData
     // public static float NomalBulletMin = 0.8f;
     //敵攻撃関係
     public static float EN_BulletSize = 1.0f;
-    public static float EN_BulletSpeed = 50f;
+    public static float EN_BulletSpeed = 20f;
 
     //敵攻撃Circle関係
     public static float CircleCreateInterval = 0.5f;
