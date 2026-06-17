@@ -8,7 +8,6 @@ public class EN_CreateBullet : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public Transform Enemy;
     public GameObject NomalBullet;
     public GameObject HomingBullet;
     public GameObject CircleBullet;
@@ -40,11 +39,11 @@ public class EN_CreateBullet : MonoBehaviour
 
     void CreateNomal()//まっすぐ飛ぶ
     {
-        Instantiate(NomalBullet, Enemy.transform.position, Quaternion.identity);
+        Instantiate(NomalBullet, this.transform.position, Quaternion.identity);
     }
     void CreateNomalHoming()//追尾する
     {
-        Instantiate(HomingBullet, Enemy.transform.position, Quaternion.identity);
+        Instantiate(HomingBullet, this.transform.position, Quaternion.identity);
     }
 
     void CreateCircleSimultaneousXY(float CircleSimRadius, int CircleSimBulletNum)//一瞬で敵の周りに円状に弾が複数現れ、同時に発射
@@ -52,8 +51,8 @@ public class EN_CreateBullet : MonoBehaviour
         for (int i = 0; i < CircleSimBulletNum; i++)
         {
             // GameObject Bullet;
-            // Bullet = Instantiate(CircleSimBullet, new Vector3(Enemy.transform.position.x + CircleSimRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), Enemy.transform.position.x + CircleSimRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), Enemy.transform.position.z), Quaternion.identity);
-            Instantiate(CircleSimBullet, new Vector3(Enemy.transform.position.x + CircleSimRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), Enemy.transform.position.x + CircleSimRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), Enemy.transform.position.z), Quaternion.identity);
+            // Bullet = Instantiate(CircleSimBullet, new Vector3(this.transform.position.x + CircleSimRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), this.transform.position.x + CircleSimRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), this.transform.position.z), Quaternion.identity);
+            Instantiate(CircleSimBullet, new Vector3(this.transform.position.x + CircleSimRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), this.transform.position.x + CircleSimRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), this.transform.position.z), Quaternion.identity);
         }
     }
 
@@ -64,7 +63,7 @@ public class EN_CreateBullet : MonoBehaviour
 
         for (int i = 0; i < EN_Data.CircleBulletNum; i++)
         {
-            ParentScript.Bullets[i] = Instantiate(CircleBullet, new Vector3(Enemy.transform.position.x + EN_Data.CircleRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * EN_Data.CircleBulletNum)) + NumericalData.PIE / 2), Enemy.transform.position.x + EN_Data.CircleRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * EN_Data.CircleBulletNum)) + NumericalData.PIE / 2), Enemy.transform.position.z), Quaternion.identity, CircleParent.transform);
+            ParentScript.Bullets[i] = Instantiate(CircleBullet, new Vector3(this.transform.position.x + EN_Data.CircleRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * EN_Data.CircleBulletNum)) + NumericalData.PIE / 2), this.transform.position.x + EN_Data.CircleRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * EN_Data.CircleBulletNum)) + NumericalData.PIE / 2), this.transform.position.z), Quaternion.identity, CircleParent.transform);
             yield return new WaitForSeconds(EN_Data.CircleCreateInterval);
         }
         ParentScript.StartShot = true;
@@ -81,7 +80,7 @@ public class EN_CreateBullet : MonoBehaviour
 
     void CreateCircleWave()
     {
-        Instantiate(CircleWaveBullet, Enemy.transform.position, Quaternion.identity);
+        Instantiate(CircleWaveBullet, this.transform.position, Quaternion.identity);
     }
 
     void CreateFan(int bulletNum, float CneterDegree)//敵の位置から扇形のようにX-Z平面上に複数の弾が発射
@@ -90,9 +89,9 @@ public class EN_CreateBullet : MonoBehaviour
         float StepAngle = CneterDegree / (bulletNum - 1);//弾を何度ずつ発射するか
         for (int i = 0; i < bulletNum; i++)
         {
-            EN_Fan Bullet = Instantiate(FanBullet, Enemy.transform.position, Quaternion.identity).GetComponent<EN_Fan>();
-            Bullet.BulletVelocity = (Quaternion.AngleAxis(StartAngle + StepAngle * i, Vector3.up) * Enemy.transform.forward) * EN_Data.EN_BulletSpeed * Time.deltaTime;
-            Debug.Log(i + ":" + Quaternion.AngleAxis(StartAngle + StepAngle * i, Vector3.up) * Enemy.transform.forward);
+            EN_Fan Bullet = Instantiate(FanBullet, this.transform.position, Quaternion.identity).GetComponent<EN_Fan>();
+            Bullet.BulletVelocity = (Quaternion.AngleAxis(StartAngle + StepAngle * i, Vector3.up) * this.transform.forward) * EN_Data.EN_BulletSpeed * Time.deltaTime;
+            Debug.Log(i + ":" + Quaternion.AngleAxis(StartAngle + StepAngle * i, Vector3.up) * this.transform.forward);
         }
     }
 }

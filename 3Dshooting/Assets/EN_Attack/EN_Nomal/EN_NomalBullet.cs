@@ -14,7 +14,7 @@ public class EN_NomalBullet : EN_AttackClass
     // Update is called once per frame
     void Update()
     {
-        nomalMove();
+        // nomalMove();
         Bullethit();
         if (this.transform.position.y <= -NumericalData.MoveBoxY / 2 || this.transform.position.z <= -NumericalData.MoveBoxZ / 2)
         {

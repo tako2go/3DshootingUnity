@@ -10,10 +10,11 @@ public class EN_Data : MonoBehaviour
     //敵情報
     public static Vector3 StartPos = new Vector3(0, 0, 20);
     public static Quaternion StartRot = Quaternion.Euler(0, 180, 0);
+    public static float EN_Speed = 50f;
 
     //敵攻撃関係
-    public static float EN_BulletSize = 1.0f;
-    public static float EN_BulletSpeed = 20f;
+    public static float EN_BulletSize = 0.5f;//弾の半径
+    public static float EN_BulletSpeed = 15f;
 
     //敵攻撃Circle関係
     public static float CircleCreateInterval = 0.5f;

@@ -16,4 +16,10 @@ public class Enemy : MonoBehaviour
     {
 
     }
+
+
+    void move()
+    {
+
+    }
 }

@@ -18,7 +18,7 @@ public class EN_AttackClass : MonoBehaviour
         Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         Enemy = GameObject.FindWithTag("Enemy").GetComponent<Transform>();
         BulletSize = BulletSizeValue;
-        this.transform.localScale = new Vector3(BulletSizeValue, BulletSizeValue, BulletSizeValue);
+        this.transform.localScale = new Vector3(BulletSizeValue * 2, BulletSizeValue * 2, BulletSizeValue * 2);//直径に変換するために*2
     }
 
     public void nomalMove()
@@ -36,11 +36,12 @@ public class EN_AttackClass : MonoBehaviour
 
     public void Bullethit()
     {
-        if (Mathf.Abs(this.transform.position.y - Player.transform.position.y) <= PL_Data.playerHeight)
+
+        if (Mathf.Abs(this.transform.position.y - Player.transform.position.y) <= PL_Data.PL_Height + BulletSize)
         {
-            if (Vector2.Distance(new Vector2(this.transform.position.x, this.transform.position.z), new Vector2(Player.transform.position.x, Player.transform.position.z)) <= BulletSize + PL_Data.playerRadius)
+            if (Vector2.Distance(new Vector2(this.transform.position.x, this.transform.position.z), new Vector2(Player.transform.position.x, Player.transform.position.z)) <= BulletSize + PL_Data.PL_Radius)
             {
-                // Debug.Log("hit");
+                Debug.Log(Vector2.Distance(new Vector2(this.transform.position.x, this.transform.position.z), new Vector2(Player.transform.position.x, Player.transform.position.z)));
                 Destroy(this.gameObject);
             }
         }
