@@ -26,13 +26,13 @@ public class EN_CreateBullet : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= 0.5f)
-        {
-            // CreateFan(11, 100);
-            CreateCircleWave();
-            timer = 0;
-        }
+        // timer += Time.deltaTime;
+        // if (timer >= 0.5f)
+        // {
+        //     // CreateFan(11, 100);
+        //     CreateCircleWave();
+        //     timer = 0;
+        // }
 
     }
 

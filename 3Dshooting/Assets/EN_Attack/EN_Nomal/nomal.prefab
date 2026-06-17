@@ -113,14 +113,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1075116321227960717}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75effca455223644a9d1d1fc09077f78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  downSpeed: 0
   BulletSize: 0
-  BulletSpeed: 0
   AbsoluteOfAccel: 0
   BulletVelocity: {x: 0, y: 0, z: 0}
   Player: {fileID: 0}
