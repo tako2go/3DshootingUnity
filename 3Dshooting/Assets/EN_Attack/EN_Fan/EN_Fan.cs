@@ -7,7 +7,7 @@ public class EN_Fan : EN_AttackClass
     // Start is called before the first frame update
     void Start()
     {
-        BulletStart(NumericalData.EN_BulletSize);
+        BulletStart(EN_Data.EN_BulletSize);
     }
 
     // Update is called once per frame

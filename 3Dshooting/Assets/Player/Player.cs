@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     Rigidbody rb;
 
     //攻撃関係
-    private float shotTimer = NumericalData.PL_shotInterVal;//スタート時点で発射できるようにするため
+    private float shotTimer = PL_Data.PL_shotInterVal;//スタート時点で発射できるようにするため
     public GameObject PlayerBullet;
 
     void Start()
@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
         }
 
 
-        if (Mathf.Abs(this.transform.position.x) >= (NumericalData.MoveBoxX / 2) - NumericalData.playerRadius)
+        if (Mathf.Abs(this.transform.position.x) >= (NumericalData.MoveBoxX / 2) - PL_Data.playerRadius)
         {
             if (this.transform.position.x * dir.x > 0)//中心に対して右、左としたとき、速度方向(x)と現在位置の左右が同じだった場合停止
             {
@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Mathf.Abs(this.transform.position.z) >= (NumericalData.MoveBoxZ / 2) - NumericalData.playerRadius)//�ړ��͈͐���
+        if (Mathf.Abs(this.transform.position.z) >= (NumericalData.MoveBoxZ / 2) - PL_Data.playerRadius)//�ړ��͈͐���
         {
             if (this.transform.position.z * dir.z > 0)
             {
@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Mathf.Abs(this.transform.position.y) >= (NumericalData.MoveBoxY / 2) - NumericalData.playerHeight)//�ړ��͈͐���
+        if (Mathf.Abs(this.transform.position.y) >= (NumericalData.MoveBoxY / 2) - PL_Data.playerHeight)//�ړ��͈͐���
         {
             if (this.transform.position.y * dir.y > 0)
             {
@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
 
 
 
-        rb.velocity = vel.normalized * NumericalData.PlayerSpeed;
+        rb.velocity = vel.normalized * PL_Data.PlayerSpeed;
 
     }
 
@@ -152,9 +152,9 @@ public class Player : MonoBehaviour
         shotTimer += Time.deltaTime;
         if (Input.GetMouseButton(0))
         {
-            if (shotTimer >= NumericalData.PL_shotInterVal)
+            if (shotTimer >= PL_Data.PL_shotInterVal)
             {
-                Vector3 BulletPos = new Vector3(transform.position.x, transform.position.y + NumericalData.playerHeight / 2, this.transform.position.z);
+                Vector3 BulletPos = new Vector3(transform.position.x, transform.position.y + PL_Data.playerHeight / 2, this.transform.position.z);
                 Bullet = Instantiate(PlayerBullet, BulletPos, Quaternion.identity);
                 if (Physics.Raycast(ray, out hit, 100f))//現在は適当な値100にしている　十分すぎるため余裕があったら修正
                 {

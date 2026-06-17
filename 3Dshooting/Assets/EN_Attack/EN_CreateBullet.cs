@@ -62,10 +62,10 @@ public class EN_CreateBullet : MonoBehaviour
         GameObject CircleParent = new GameObject("CircleParent");
         EN_CircleBullet_Parent ParentScript = CircleParent.AddComponent<EN_CircleBullet_Parent>();
 
-        for (int i = 0; i < NumericalData.CircleBulletNum; i++)
+        for (int i = 0; i < EN_Data.CircleBulletNum; i++)
         {
-            ParentScript.Bullets[i] = Instantiate(CircleBullet, new Vector3(Enemy.transform.position.x + NumericalData.CircleRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * NumericalData.CircleBulletNum)) + NumericalData.PIE / 2), Enemy.transform.position.x + NumericalData.CircleRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * NumericalData.CircleBulletNum)) + NumericalData.PIE / 2), Enemy.transform.position.z), Quaternion.identity, CircleParent.transform);
-            yield return new WaitForSeconds(NumericalData.CircleCreateInterval);
+            ParentScript.Bullets[i] = Instantiate(CircleBullet, new Vector3(Enemy.transform.position.x + EN_Data.CircleRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * EN_Data.CircleBulletNum)) + NumericalData.PIE / 2), Enemy.transform.position.x + EN_Data.CircleRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * EN_Data.CircleBulletNum)) + NumericalData.PIE / 2), Enemy.transform.position.z), Quaternion.identity, CircleParent.transform);
+            yield return new WaitForSeconds(EN_Data.CircleCreateInterval);
         }
         ParentScript.StartShot = true;
     }
@@ -91,7 +91,7 @@ public class EN_CreateBullet : MonoBehaviour
         for (int i = 0; i < bulletNum; i++)
         {
             EN_Fan Bullet = Instantiate(FanBullet, Enemy.transform.position, Quaternion.identity).GetComponent<EN_Fan>();
-            Bullet.BulletVelocity = (Quaternion.AngleAxis(StartAngle + StepAngle * i, Vector3.up) * Enemy.transform.forward) * NumericalData.EN_BulletSpeed * Time.deltaTime;
+            Bullet.BulletVelocity = (Quaternion.AngleAxis(StartAngle + StepAngle * i, Vector3.up) * Enemy.transform.forward) * EN_Data.EN_BulletSpeed * Time.deltaTime;
             Debug.Log(i + ":" + Quaternion.AngleAxis(StartAngle + StepAngle * i, Vector3.up) * Enemy.transform.forward);
         }
     }

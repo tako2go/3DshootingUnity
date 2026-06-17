@@ -2,22 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EN_CircleBullet : EN_AttackClass
+public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
-    public bool shot;
     void Start()
     {
-        BulletStart(EN_Data.EN_BulletSize);
+        this.transform.position = EN_Data.StartPos;
+        this.transform.rotation = EN_Data.StartRot;
     }
+
     // Update is called once per frame
     void Update()
     {
-        if (shot)
-        {
-            nomalMove();
-            Bullethit();
-        }
-        Debug.Log(shot);
+
     }
 }

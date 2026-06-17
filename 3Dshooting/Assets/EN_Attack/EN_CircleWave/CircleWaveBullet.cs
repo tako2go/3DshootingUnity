@@ -6,8 +6,6 @@ public class CircleWaveBullet : EN_AttackClass
 {
     // Start is called before the first frame update
 
-    private float Radius = 5;
-
     private Vector3 RunDir;
     private Vector3 RorateDir;
 
@@ -19,8 +17,8 @@ public class CircleWaveBullet : EN_AttackClass
     private float timer = 0;
     void Start()
     {
-        BulletStart(NumericalData.EN_BulletSize);
-        BulletVelocity = -this.transform.forward * NumericalData.EN_BulletSpeed / 3 * Time.deltaTime;
+        BulletStart(EN_Data.EN_BulletSize);
+        BulletVelocity = -this.transform.forward * EN_Data.EN_BulletSpeed / 3 * Time.deltaTime;
         CenterPos = this.transform.position;
         RunDir = Enemy.transform.forward;
         RorateDir = Enemy.transform.right;
@@ -41,7 +39,7 @@ public class CircleWaveBullet : EN_AttackClass
     {
         CenterPos += BulletVelocity;
         Angle += RotateSpeed * Time.deltaTime;
-        Vector3 offset = Quaternion.AngleAxis(Angle, RunDir) * transform.right * Radius;
+        Vector3 offset = Quaternion.AngleAxis(Angle, RunDir) * transform.right * EN_Data.CircleWaveRadius;
         transform.position = CenterPos + offset;
     }
 }

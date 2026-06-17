@@ -31,14 +31,14 @@ public class EN_AttackClass : MonoBehaviour
         AbsoluteOfAccel = Mathf.Pow(2, -Mathf.Abs(this.transform.position.z - Player.transform.position.z) + 6) + 1;//2^(-x＋〇)+〇
         accelaration = Player.transform.position - this.transform.position;
         BulletVelocity = BulletVelocity.normalized + accelaration.normalized * AbsoluteOfAccel * Time.deltaTime;
-        this.transform.position += BulletVelocity.normalized * NumericalData.EN_BulletSpeed * Time.deltaTime;
+        this.transform.position += BulletVelocity.normalized * EN_Data.EN_BulletSpeed * Time.deltaTime;
     }
 
     public void Bullethit()
     {
-        if (Mathf.Abs(this.transform.position.y - Player.transform.position.y) <= NumericalData.playerHeight)
+        if (Mathf.Abs(this.transform.position.y - Player.transform.position.y) <= PL_Data.playerHeight)
         {
-            if (Vector2.Distance(new Vector2(this.transform.position.x, this.transform.position.z), new Vector2(Player.transform.position.x, Player.transform.position.z)) <= BulletSize + NumericalData.playerRadius)
+            if (Vector2.Distance(new Vector2(this.transform.position.x, this.transform.position.z), new Vector2(Player.transform.position.x, Player.transform.position.z)) <= BulletSize + PL_Data.playerRadius)
             {
                 // Debug.Log("hit");
                 Destroy(this.gameObject);
