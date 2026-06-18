@@ -18,38 +18,11 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= 20)
-        {
-            destinaton = new Vector3(10, -10, EN_Data.BasePos.z);
-        }
-        else if (timer >= 15)
-        {
-            destinaton = new Vector3(-10, -10, EN_Data.BasePos.z);
-        }
-        else if (timer >= 10)
-        {
-            destinaton = new Vector3(-10, 10, EN_Data.BasePos.z);
 
-        }
-        else if (timer >= 5)
-        {
-            destinaton = new Vector3(10, 10, EN_Data.BasePos.z);
-        }
-        else
-        {
-            destinaton = EN_Data.BasePos;
-        }
-
-        if (timer >= 25)
-        {
-            timer = 0;
-        }
-        move();
     }
 
 
-    void move()
+    public void move()
     {
         MoveFlag = ((destinaton - this.transform.position).sqrMagnitude > EN_Data.destinatonRadius * EN_Data.destinatonRadius);
 

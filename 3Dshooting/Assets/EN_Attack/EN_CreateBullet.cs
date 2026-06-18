@@ -21,7 +21,6 @@ public class EN_CreateBullet : MonoBehaviour
     void Start()
     {
         // StartCoroutine(CreateCircleWave(30));
-
     }
 
     void Update()
@@ -37,7 +36,7 @@ public class EN_CreateBullet : MonoBehaviour
     }
 
 
-    void CreateNomal()//まっすぐ飛ぶ
+    public void CreateNomal()//まっすぐ飛ぶ
     {
         Instantiate(NomalBullet, this.transform.position, Quaternion.identity);
     }

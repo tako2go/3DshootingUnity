@@ -18,6 +18,6 @@ public class EN_CircleBullet : EN_AttackClass
             nomalMove();
             Bullethit();
         }
-        Debug.Log(shot);
+        // Debug.Log(shot);
     }
 }
