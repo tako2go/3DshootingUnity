@@ -10,13 +10,18 @@ public class EN_Tutorial : MonoBehaviour
     bool MoveFlag = false;
     float timer = 0;
     EN_Action_Tutorial Action;
+
+    //生成するオブジェクト
     public GameObject Red;
+    public GameObject Blue;
+
+
     void Start()
     {
         this.transform.position = EN_Data.BasePos;
         this.transform.rotation = EN_Data.StartRot;
         Action = this.GetComponent<EN_Action_Tutorial>();
-        Action.Move_Shot(new Vector3(10, 10, 20), 5, () => { Action.CreateNomalHoming(Red); }, 1);
+        Action.Move_Shot(new Vector3(10, 10, 20), 5, () => { Action.CreateCircle(Red, Blue); }, 1);
     }
 
     // Update is called once per frame
