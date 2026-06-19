@@ -28,9 +28,14 @@ public class EN_AttackClass : MonoBehaviour
 
     public void homingMove()
     {
-        AbsoluteOfAccel = Mathf.Pow(2, -Mathf.Abs(this.transform.position.z - Player.transform.position.z) + 6) + 1;//2^(-x＋〇)+〇
-        accelaration = Player.transform.position - this.transform.position;
-        BulletVelocity = BulletVelocity.normalized + accelaration.normalized * AbsoluteOfAccel * Time.deltaTime;
+        Debug.Log(BulletVelocity);
+        if ((this.transform.position.z - Player.transform.position.z) >= EN_Data.HomingDistance)//弾がプレイヤーに対しホーミング可能距離より離れていたら
+        {
+            AbsoluteOfAccel = (Mathf.Pow(2, -Mathf.Abs(this.transform.position.z - Player.transform.position.z) + 3) + 0) * 0.1f;//(2^(-x＋〇グラフ右ずらし)+〇グラフ上上げ)*〇グラフ縦圧縮
+            accelaration = Player.transform.position - this.transform.position;
+            BulletVelocity = BulletVelocity.normalized + accelaration.normalized * AbsoluteOfAccel;
+        }
+
         this.transform.position += BulletVelocity.normalized * EN_Data.EN_BulletSpeed * Time.deltaTime;
     }
 

@@ -15,6 +15,10 @@ public class EN_Data : MonoBehaviour
     public static float EN_BulletSize = 0.5f;//弾の半径
     public static float EN_BulletSpeed = 15f;
     public static float destinatonRadius = 1.0f;//目的地に到達したとみなす半径
+
+    //敵攻撃homing関係
+    public static float HomingDistance = 1.0f;//ホーミング実行不可能距離(z軸に対してのみ x,yは無関係)
+
     //敵攻撃Circle関係
     public static float CircleCreateInterval = 0.5f;
     public static float CircleShotInterval = 1f;
