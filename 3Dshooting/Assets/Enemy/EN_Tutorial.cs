@@ -10,12 +10,13 @@ public class EN_Tutorial : MonoBehaviour
     bool MoveFlag = false;
     float timer = 0;
     EN_Action_Tutorial Action;
+    public GameObject Red;
     void Start()
     {
         this.transform.position = EN_Data.BasePos;
         this.transform.rotation = EN_Data.StartRot;
         Action = this.GetComponent<EN_Action_Tutorial>();
-        Action.Move_Shot(new Vector3(10, 10, 20), 5, Action.CreateNomal, 10);
+        Action.Move_Shot(new Vector3(10, 10, 20), 5, () => { Action.CreateNomalHoming(Red); }, 10);
     }
 
     // Update is called once per frame

@@ -22,14 +22,14 @@ public class Enemy : MonoBehaviour
     }
 
 
-    public void move()
-    {
-        MoveFlag = ((destinaton - this.transform.position).sqrMagnitude > EN_Data.destinatonRadius * EN_Data.destinatonRadius);
+    // public void move()
+    // {
+    //     MoveFlag = ((destinaton - this.transform.position).sqrMagnitude > EN_Data.destinatonRadius * EN_Data.destinatonRadius);
 
-        if (MoveFlag)
-        {
-            Velocity = (destinaton - this.transform.position).normalized * EN_Data.EN_Speed * Time.deltaTime;
-            this.transform.position += Velocity;
-        }
-    }
+    //     if (MoveFlag)
+    //     {
+    //         Velocity = (destinaton - this.transform.position).normalized * EN_Data.EN_Speed * Time.deltaTime;
+    //         this.transform.position += Velocity;
+    //     }
+    // }
 }

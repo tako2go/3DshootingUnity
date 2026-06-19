@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CircleWaveBullet : EN_AttackClass
+public class EN_CircleWave : EN_AttackClass
 {
     // Start is called before the first frame update
 

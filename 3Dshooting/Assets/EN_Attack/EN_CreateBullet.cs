@@ -8,12 +8,13 @@ public class EN_CreateBullet : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public GameObject NomalBullet;
-    public GameObject HomingBullet;
-    public GameObject CircleBullet;
-    public GameObject CircleSimBullet;
-    public GameObject CircleWaveBullet;
-    public GameObject FanBullet;
+    // public GameObject NomalBullet;
+    // public GameObject HomingBullet;
+    // public GameObject CircleBullet;
+    // public GameObject CircleSimBullet;
+    // public GameObject CircleWaveBullet;
+    // public GameObject FanBullet;
+
     // Update is called once per frame
     bool Flag = false;
     float timer = 0;
@@ -36,37 +37,41 @@ public class EN_CreateBullet : MonoBehaviour
     }
 
 
-    public void CreateNomal()//まっすぐ飛ぶ
+    public void CreateNomal(GameObject BulletType)//まっすぐ飛ぶ
     {
-        Instantiate(NomalBullet, this.transform.position, Quaternion.identity);
+        GameObject NomalBullet = Instantiate(BulletType, this.transform.position, Quaternion.identity);
+        NomalBullet.AddComponent<EN_NomalBullet>();
+
     }
-    void CreateNomalHoming()//追尾する
+    public void CreateNomalHoming(GameObject BulletType)//追尾する
     {
-        Instantiate(HomingBullet, this.transform.position, Quaternion.identity);
+        GameObject HomingBullet = Instantiate(BulletType, this.transform.position, Quaternion.identity);
+        HomingBullet.AddComponent<EN_HomingBullet>();
     }
 
-    void CreateCircleSimultaneousXY(float CircleSimRadius, int CircleSimBulletNum)//一瞬で敵の周りに円状に弾が複数現れ、同時に発射
+    void CreateCircleSimultaneousXY(GameObject BulletType, float CircleSimRadius, int CircleSimBulletNum)//一瞬で敵の周りに円状に弾が複数現れ、同時に発射
     {
         for (int i = 0; i < CircleSimBulletNum; i++)
         {
             // GameObject Bullet;
             // Bullet = Instantiate(CircleSimBullet, new Vector3(this.transform.position.x + CircleSimRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), this.transform.position.x + CircleSimRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), this.transform.position.z), Quaternion.identity);
-            Instantiate(CircleSimBullet, new Vector3(this.transform.position.x + CircleSimRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), this.transform.position.x + CircleSimRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), this.transform.position.z), Quaternion.identity);
+            GameObject CircleSimultaneousXY = Instantiate(BulletType, new Vector3(this.transform.position.x + CircleSimRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), this.transform.position.x + CircleSimRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), this.transform.position.z), Quaternion.identity);
+            CircleSimultaneousXY.AddComponent<EN_CircleSimultaneousXY>();
         }
     }
 
-    IEnumerator CreateCircle()//敵の周りに弾が円状に少しずつ現れ、一つずつ発射
-    {
-        GameObject CircleParent = new GameObject("CircleParent");
-        EN_CircleBullet_Parent ParentScript = CircleParent.AddComponent<EN_CircleBullet_Parent>();
+    // IEnumerator CreateCircle()//敵の周りに弾が円状に少しずつ現れ、一つずつ発射
+    // {
+    //     GameObject CircleParent = new GameObject("CircleParent");
+    //     EN_CircleBullet_Parent ParentScript = CircleParent.AddComponent<EN_CircleBullet_Parent>();
 
-        for (int i = 0; i < EN_Data.CircleBulletNum; i++)
-        {
-            ParentScript.Bullets[i] = Instantiate(CircleBullet, new Vector3(this.transform.position.x + EN_Data.CircleRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * EN_Data.CircleBulletNum)) + NumericalData.PIE / 2), this.transform.position.x + EN_Data.CircleRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * EN_Data.CircleBulletNum)) + NumericalData.PIE / 2), this.transform.position.z), Quaternion.identity, CircleParent.transform);
-            yield return new WaitForSeconds(EN_Data.CircleCreateInterval);
-        }
-        ParentScript.StartShot = true;
-    }
+    //     for (int i = 0; i < EN_Data.CircleBulletNum; i++)
+    //     {
+    //         ParentScript.Bullets[i] = Instantiate(CircleBullet, new Vector3(this.transform.position.x + EN_Data.CircleRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * EN_Data.CircleBulletNum)) + NumericalData.PIE / 2), this.transform.position.x + EN_Data.CircleRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * EN_Data.CircleBulletNum)) + NumericalData.PIE / 2), this.transform.position.z), Quaternion.identity, CircleParent.transform);
+    //         yield return new WaitForSeconds(EN_Data.CircleCreateInterval);
+    //     }
+    //     ParentScript.StartShot = true;
+    // }
 
     // IEnumerator CreateCircleWave(int CircleWaveBulletNum)//複数の弾が波のように円を描きながら迫ってくる
     // {
@@ -77,20 +82,23 @@ public class EN_CreateBullet : MonoBehaviour
     //     }
     // }
 
-    void CreateCircleWave()
+    void CreateCircleWave(GameObject BulletType)
     {
-        Instantiate(CircleWaveBullet, this.transform.position, Quaternion.identity);
+        GameObject CircleWaveBullet = Instantiate(BulletType, this.transform.position, Quaternion.identity);
+        CircleWaveBullet.AddComponent<EN_CircleWave>();
     }
 
-    void CreateFan(int bulletNum, float CneterDegree)//敵の位置から扇形のようにX-Z平面上に複数の弾が発射
+    void CreateFan(GameObject BulletType, int bulletNum, float CneterDegree)//敵の位置から扇形のようにX-Z平面上に複数の弾が発射
     {
         float StartAngle = -CneterDegree / 2;//最初の発射方向
         float StepAngle = CneterDegree / (bulletNum - 1);//弾を何度ずつ発射するか
+
         for (int i = 0; i < bulletNum; i++)
         {
-            EN_Fan Bullet = Instantiate(FanBullet, this.transform.position, Quaternion.identity).GetComponent<EN_Fan>();
+            GameObject FanBullet = Instantiate(BulletType, this.transform.position, Quaternion.identity);
+            EN_Fan Bullet = FanBullet.AddComponent<EN_Fan>();
             Bullet.BulletVelocity = (Quaternion.AngleAxis(StartAngle + StepAngle * i, Vector3.up) * this.transform.forward) * EN_Data.EN_BulletSpeed * Time.deltaTime;
-            Debug.Log(i + ":" + Quaternion.AngleAxis(StartAngle + StepAngle * i, Vector3.up) * this.transform.forward);
+            // Debug.Log(i + ":" + Quaternion.AngleAxis(StartAngle + StepAngle * i, Vector3.up) * this.transform.forward);
         }
     }
 }

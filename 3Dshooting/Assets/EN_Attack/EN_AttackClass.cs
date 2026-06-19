@@ -36,13 +36,11 @@ public class EN_AttackClass : MonoBehaviour
 
     public void Bullethit()
     {
-
         if (Mathf.Abs(this.transform.position.y - Player.transform.position.y) <= PL_Data.PL_Height + BulletSize)
         {
             if ((new Vector2(this.transform.position.x, this.transform.position.z) - new Vector2(Player.transform.position.x, Player.transform.position.z)).sqrMagnitude <= (BulletSize + PL_Data.PL_Radius) * (BulletSize + PL_Data.PL_Radius))
             {
-                // Destroy(this.gameObject);
-                Debug.Log("hit");
+                Destroy(this.gameObject);
             }
         }
     }

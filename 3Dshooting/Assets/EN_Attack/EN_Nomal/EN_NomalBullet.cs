@@ -8,12 +8,12 @@ public class EN_NomalBullet : EN_AttackClass
     void Start()
     {
         BulletStart(EN_Data.EN_BulletSize);
-        BulletVelocity = Enemy.transform.forward * EN_Data.EN_BulletSpeed * Time.deltaTime;
     }
 
     // Update is called once per frame
     void Update()
     {
+        BulletVelocity = Enemy.transform.forward * EN_Data.EN_BulletSpeed * Time.deltaTime;
         nomalMove();
         Bullethit();
         if (this.transform.position.y <= -NumericalData.MoveBoxY / 2 || this.transform.position.z <= -NumericalData.MoveBoxZ / 2)

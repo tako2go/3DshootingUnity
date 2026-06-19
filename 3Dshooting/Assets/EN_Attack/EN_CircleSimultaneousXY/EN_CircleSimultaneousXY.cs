@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreateCircleSimultaneousXY : EN_AttackClass
+public class EN_CircleSimultaneousXY : EN_AttackClass
 {
     // Start is called before the first frame update
     void Start()
