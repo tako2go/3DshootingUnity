@@ -14,7 +14,6 @@ public class EN_NomalBullet : EN_AttackClass
     void Update()
     {
         BulletVelocity = BulletDir.normalized * EN_BulletSpeed * Time.deltaTime;
-        Debug.Log(EN_BulletSpeed);
         nomalMove();
         Bullethit();
         bulletDestroy();

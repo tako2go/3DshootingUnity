@@ -26,10 +26,13 @@ public class EN_CreateBullet : MonoBehaviour
         bullet.EN_BulletSpeed = Speed;
         bullet.BulletSize = size;
     }
-    public void CreateNomalHoming(GameObject BulletType)//追尾する
+    public void CreateNomalHoming(GameObject BulletType, Vector3 directon, float Speed, float size)//追尾する
     {
         GameObject HomingBullet = Instantiate(BulletType, this.transform.position, Quaternion.identity);
-        HomingBullet.AddComponent<EN_HomingBullet>();
+        EN_HomingBullet bullet = HomingBullet.AddComponent<EN_HomingBullet>();
+        bullet.BulletDir = directon;//最初の方向
+        bullet.EN_BulletSpeed = Speed;
+        bullet.BulletSize = size;
     }
 
     public void CreateCircleSimultaneousXY(GameObject BulletType, float CircleSimRadius, int CircleSimBulletNum)//一瞬で敵の周りに円状に弾が複数現れ、同時に発射

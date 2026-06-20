@@ -10,6 +10,8 @@ public class EN_Data : MonoBehaviour
     //-----------------敵情報-----------------
     public static Vector3 BasePos = new Vector3(0, 0, 20);
     public static Quaternion StartRot = Quaternion.Euler(0, 180, 0);
+    public static float destinatonRadius = 1.0f;//move関数を用いたと際に目的地に到達したとみなす半径
+
 
     //-----------------敵攻撃関係-----------------
     //サイズ関係
@@ -22,8 +24,7 @@ public class EN_Data : MonoBehaviour
 
 
     //敵攻撃homing関係
-    public static float HomingDistance = 1.0f;//ホーミング実行不可能距離(z軸に対してのみ x,yは無関係)
-    public static float destinatonRadius = 1.0f;//目的地に到達したとみなす半径
+    public static float HomingDistance = 1.5f;//ホーミング実行不可能距離(z軸に対してのみ x,yは無関係)
 
     //敵攻撃Circle関係
     public static float CircleCreateInterval = 0.5f;
