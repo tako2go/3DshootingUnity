@@ -14,6 +14,7 @@ public class EN_AttackClass : MonoBehaviour
 
     public Transform Player;
     public Transform Enemy;
+    float tiemr = 0;
 
     public void BulletStart(float BulletSizeValue)
     {
@@ -52,7 +53,8 @@ public class EN_AttackClass : MonoBehaviour
 
     public void bulletDestroy()//指定の範囲から出たら削除
     {
-        if (this.transform.position.y <= -NumericalData.MoveBoxY / 2 || this.transform.position.z <= -NumericalData.MoveBoxZ / 2)
+        tiemr += Time.deltaTime;
+        if ((this.transform.position.y <= -NumericalData.MoveBoxY / 2 || this.transform.position.z <= -NumericalData.MoveBoxZ / 2) || tiemr >= 10f)
         {
             Destroy(this.gameObject);
         }
