@@ -767,10 +767,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 980938596}
-  - component: {fileID: 980938595}
-  - component: {fileID: 980938598}
   - component: {fileID: 980938597}
-  - component: {fileID: 980938599}
   m_Layer: 0
   m_Name: TutorialEnemy
   m_TagString: Untagged
@@ -778,18 +775,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &980938595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 980938594}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ecfe958a93923b47a1570d1e64ada54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &980938596
 Transform:
   m_ObjectHideFlags: 0
@@ -820,32 +805,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Red: {fileID: 4534901266593497311, guid: 646fd7cd1ad1abb4faaf8572c81018d1, type: 3}
   Blue: {fileID: 8354528677067102570, guid: 321a746c3cce2124b96c3a90ba728d49, type: 3}
---- !u!114 &980938598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 980938594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd632a9a89118254fbbe273e22dcd821, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Flag: 0
-  timer: 0
---- !u!114 &980938599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 980938594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5839e500b0851ee459e8a0acd3b03ad6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1009980866
 GameObject:
   m_ObjectHideFlags: 0

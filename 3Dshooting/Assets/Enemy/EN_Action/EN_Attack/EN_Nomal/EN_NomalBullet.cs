@@ -13,7 +13,8 @@ public class EN_NomalBullet : EN_AttackClass
     // Update is called once per frame
     void Update()
     {
-        BulletVelocity = Enemy.transform.forward * EN_Data.EN_BulletSpeed * Time.deltaTime;
+        BulletVelocity = BulletDir.normalized * EN_BulletSpeed * Time.deltaTime;
+        Debug.Log(EN_BulletSpeed);
         nomalMove();
         Bullethit();
         bulletDestroy();

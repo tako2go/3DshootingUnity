@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class EN_CreateBullet : MonoBehaviour
@@ -17,11 +18,13 @@ public class EN_CreateBullet : MonoBehaviour
 
 
 
-    public void CreateNomal(GameObject BulletType)//まっすぐ飛ぶ
+    public void CreateNomal(GameObject BulletType, Vector3 directon, float Speed, float size)//まっすぐ飛ぶ
     {
         GameObject NomalBullet = Instantiate(BulletType, this.transform.position, Quaternion.identity);
-        NomalBullet.AddComponent<EN_NomalBullet>();
-
+        EN_NomalBullet bullet = NomalBullet.AddComponent<EN_NomalBullet>();
+        bullet.BulletDir = directon;
+        bullet.EN_BulletSpeed = Speed;
+        bullet.BulletSize = size;
     }
     public void CreateNomalHoming(GameObject BulletType)//追尾する
     {

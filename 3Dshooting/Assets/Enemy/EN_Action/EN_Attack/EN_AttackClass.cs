@@ -6,8 +6,10 @@ using UnityEngine;
 public class EN_AttackClass : MonoBehaviour
 {
     public float BulletSize;//半径
-    public float AbsoluteOfAccel;
-    public Vector3 BulletVelocity;
+    public float AbsoluteOfAccel;//ホーミング弾の加速度の大きさ
+    public Vector3 BulletVelocity;//弾の速度
+    public Vector3 BulletDir;//弾の方向
+    public float EN_BulletSpeed;
     Vector3 accelaration;
 
     public Transform Player;
@@ -17,7 +19,6 @@ public class EN_AttackClass : MonoBehaviour
     {
         Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         Enemy = GameObject.FindWithTag("Enemy").GetComponent<Transform>();
-        BulletSize = BulletSizeValue;
         this.transform.localScale = new Vector3(BulletSizeValue * 2, BulletSizeValue * 2, BulletSizeValue * 2);//直径に変換するために*2
     }
 
