@@ -54,7 +54,7 @@ public class EN_AttackClass : MonoBehaviour
     public void bulletDestroy()//指定の範囲から出たら削除
     {
         tiemr += Time.deltaTime;
-        if ((this.transform.position.y <= -NumericalData.MoveBoxY / 2 || this.transform.position.z <= -NumericalData.MoveBoxZ / 2) || tiemr >= 10f)
+        if ((this.transform.position.y <= -NumericalData.MoveBoxY / 2 || this.transform.position.z <= -NumericalData.MoveBoxZ / 2) || tiemr >= 30f)
         {
             Destroy(this.gameObject);
         }

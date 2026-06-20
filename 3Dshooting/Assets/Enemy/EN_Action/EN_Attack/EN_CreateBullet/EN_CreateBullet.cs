@@ -71,7 +71,7 @@ public class EN_CreateBullet : MonoBehaviour
         CircleWaveBullet.AddComponent<EN_CircleWave>();
     }
 
-    public void CreateFan(GameObject BulletType, int bulletNum, float CneterDegree)//敵の位置から扇形のようにX-Z平面上に複数の弾が発射
+    public void CreateFan(GameObject BulletType, Vector3 directon, float Speed, float size, int bulletNum, float CneterDegree)//敵の位置から扇形のようにX-Z平面上に複数の弾が発射
     {
         float StartAngle = -CneterDegree / 2;//最初の発射方向
         float StepAngle = CneterDegree / (bulletNum - 1);//弾を何度ずつ発射するか
@@ -80,7 +80,8 @@ public class EN_CreateBullet : MonoBehaviour
         {
             GameObject FanBullet = Instantiate(BulletType, this.transform.position, Quaternion.identity);
             EN_Fan Bullet = FanBullet.AddComponent<EN_Fan>();
-            Bullet.BulletVelocity = (Quaternion.AngleAxis(StartAngle + StepAngle * i, Vector3.up) * this.transform.forward) * EN_Data.EN_BulletSpeed * Time.deltaTime;
+            Bullet.BulletSize = size;
+            Bullet.BulletVelocity = (Quaternion.AngleAxis(StartAngle + StepAngle * i, Vector3.up) * directon.normalized) * Speed * Time.deltaTime;
             // Debug.Log(i + ":" + Quaternion.AngleAxis(StartAngle + StepAngle * i, Vector3.up) * this.transform.forward);
         }
     }

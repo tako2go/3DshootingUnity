@@ -21,7 +21,7 @@ public class EN_Tutorial : MonoBehaviour
         this.transform.position = EN_Data.BasePos;
         this.transform.rotation = EN_Data.StartRot;
         Action = this.GetComponent<EN_Action_Tutorial>();
-        Action.Move_Shot(new Vector3(10, 10, 20), 5, () => { Action.CreateCircleSimultaneous(Blue, Player.transform.position - this.transform.position, 15f, 1f, 3f, 8); }, 5);
+        Action.Move_Shot(new Vector3(10, 10, 20), 5, () => { Action.CreateFan(Blue, Player.transform.position - this.transform.position, 10f, 1f, 10, 100); }, 5);
     }
 
     // Update is called once per frame
