@@ -1,0 +1,19 @@
+//nomal弾
+CreateNomal(GameObject BulletType, Vector3 directon, float Speed, float size) (弾の見た目,移動方向,速さ,弾の大きさ)
+
+//homing弾
+CreateNomalHoming(GameObject BulletType, Vector3 directon, float Speed, float size)(弾の見た目,移動方向,速さ,弾の大きさ)
+
+
+ //Circle弾
+ CreateCircle(GameObject Parenttype, GameObject BulletType, float Speed, float size, float Radius, int BulletNum, float CreateInterval, float shotInterval)　
+            (親の見た目,弾の見た目,速さ,弾の大きさ,Circle半径, 弾数,生成インターバル,発射インターバル)
+
+//CircleSimultaneous弾
+CreateCircleSimultaneous(GameObject BulletType, Vector3 directon, float Speed, float size, float CircleSimRadius, int CircleSimBulletNum) (弾の見た目,移動方向,速さ,弾の大きさ,Circle半径, 弾数)
+
+//CreateCircleWave弾
+CreateCircleWave(GameObject BulletType, Vector3 directon, float Speed, float size, float RotSpeed, float WaveRadius) (弾の見た目,移動方向,速さ,弾の大きさ,回転速度,回転半径)
+
+//Fan弾
+ CreateFan(GameObject BulletType, Vector3 directon, float Speed, float size, int bulletNum, float CneterDegree)　(弾の見た目,移動方向,速さ,弾の大きさ,弾数,中心角)

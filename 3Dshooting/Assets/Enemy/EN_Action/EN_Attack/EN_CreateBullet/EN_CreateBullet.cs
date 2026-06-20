@@ -41,11 +41,17 @@ public class EN_CreateBullet : MonoBehaviour
         }
     }
 
-    public void CreateCircle(GameObject BulletType, GameObject Parenttype)
+    public void CreateCircle(GameObject Parenttype, GameObject BulletType, float Speed, float size, float Radius, int BulletNum, float CreateInterval, float shotInterval)
     {
         GameObject CircleParent = Instantiate(Parenttype, this.transform.position, Quaternion.identity);
         EN_CircleBullet_Parent parent = CircleParent.AddComponent<EN_CircleBullet_Parent>();
         parent.Bullet = BulletType;
+        parent.childBulletSpeed = Speed;
+        parent.childBulletSize = size;
+        parent.CircleRadius = Radius;
+        parent.CircleBulletNum = BulletNum;
+        parent.CircleCreateInterval = CreateInterval;
+        parent.CircleShotInterval = shotInterval;
     }
 
     public void CreateCircleWave(GameObject BulletType, Vector3 directon, float Speed, float size, float RotSpeed, float WaveRadius)
@@ -70,7 +76,8 @@ public class EN_CreateBullet : MonoBehaviour
             GameObject FanBullet = Instantiate(BulletType, this.transform.position, Quaternion.identity);
             EN_Fan Bullet = FanBullet.AddComponent<EN_Fan>();
             Bullet.BulletSize = size;
-            Bullet.BulletVelocity = (Quaternion.AngleAxis(StartAngle + StepAngle * i, Vector3.up) * directon.normalized) * Speed * Time.deltaTime;
+            Bullet.BulletDir = (Quaternion.AngleAxis(StartAngle + StepAngle * i, Vector3.up) * directon.normalized);
+            Bullet.EN_BulletSpeed = Speed;
             // Debug.Log(i + ":" + Quaternion.AngleAxis(StartAngle + StepAngle * i, Vector3.up) * this.transform.forward);
         }
     }

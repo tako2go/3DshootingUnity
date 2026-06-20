@@ -7,12 +7,13 @@ public class EN_Fan : EN_AttackClass
     // Start is called before the first frame update
     void Start()
     {
-        BulletStart(EN_Data.EN_BulletSize);
+        BulletStart();
     }
 
     // Update is called once per frame
     void Update()
     {
+        BulletVelocity = BulletVelocity = BulletDir.normalized * EN_BulletSpeed * Time.deltaTime;
         nomalMove();
         Bullethit();
         bulletDestroy();

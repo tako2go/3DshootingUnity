@@ -19,7 +19,7 @@ public class EN_Data : MonoBehaviour
 
     //速度関係
     public static float EN_BulletSpeed_Low = 5f;
-    public static float EN_BulletSpeed = 15f;
+    public static float EN_BulletSpeed_Nomal = 15f;
     public static float EN_BulletSpeed_High = 30f;
 
 

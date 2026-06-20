@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class EN_CircleBullet : EN_AttackClass
@@ -8,13 +9,14 @@ public class EN_CircleBullet : EN_AttackClass
     public bool shot;
     void Start()
     {
-        BulletStart(EN_Data.EN_BulletSize);
+        BulletStart();
     }
     // Update is called once per frame
     void Update()
     {
         if (shot)
         {
+            BulletVelocity = BulletDir.normalized * EN_BulletSpeed * Time.deltaTime;
             nomalMove();
             Bullethit();
             bulletDestroy();

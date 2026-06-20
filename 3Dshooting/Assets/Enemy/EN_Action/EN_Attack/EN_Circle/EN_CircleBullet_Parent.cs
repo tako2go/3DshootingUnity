@@ -2,18 +2,31 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class EN_CircleBullet_Parent : MonoBehaviour
 {
+    //---------フラグ関係---------
     public bool StartShotFlag = false;
     bool shotFlag = false;//現在発射しているか
+
+    //---------circleプロパティ---------
+    public int CircleBulletNum;
+    public float childBulletSpeed;
+    public float childBulletSize;
+    public float CircleRadius;
+    public float CircleCreateInterval;
+    public float CircleShotInterval;
+    //---------フラグ関係---------
     public GameObject Bullet;
-    public GameObject[] Bullets = new GameObject[EN_Data.CircleBulletNum];
+    public GameObject[] Bullets;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        Bullets = new GameObject[CircleBulletNum];
         StartCoroutine(CreateCircleBullet());
     }
 
@@ -28,7 +41,7 @@ public class EN_CircleBullet_Parent : MonoBehaviour
             shotFlag = true;
         }
 
-        if (Bullets[EN_Data.CircleBulletNum - 1] == null && shotFlag)//弾をすべて打ち終え、すべての弾が消えたら
+        if (Bullets[CircleBulletNum - 1] == null && shotFlag)//弾をすべて打ち終え、すべての弾が消えたら
         {
             Destroy(this.gameObject);
         }
@@ -37,10 +50,10 @@ public class EN_CircleBullet_Parent : MonoBehaviour
     IEnumerator CreateCircleBullet()//敵の周りに弾が円状に少しずつ現れ、一つずつ発射
     {
 
-        for (int i = 0; i < EN_Data.CircleBulletNum; i++)
+        for (int i = 0; i < CircleBulletNum; i++)
         {
-            Bullets[i] = Instantiate(Bullet, new Vector3(this.transform.position.x + EN_Data.CircleRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * EN_Data.CircleBulletNum)) + NumericalData.PIE / 2), this.transform.position.x + EN_Data.CircleRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * EN_Data.CircleBulletNum)) + NumericalData.PIE / 2), this.transform.position.z), Quaternion.identity, this.transform);
-            yield return new WaitForSeconds(EN_Data.CircleCreateInterval);
+            Bullets[i] = Instantiate(Bullet, new Vector3(this.transform.position.x + CircleRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * CircleBulletNum)) + NumericalData.PIE / 2), this.transform.position.x + CircleRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * CircleBulletNum)) + NumericalData.PIE / 2), this.transform.position.z), Quaternion.identity, this.transform);
+            yield return new WaitForSeconds(CircleCreateInterval);
         }
         StartShotFlag = true;
     }
@@ -49,12 +62,14 @@ public class EN_CircleBullet_Parent : MonoBehaviour
     {
         Transform Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         EN_CircleBullet childBullet;
-        for (int i = 0; i < EN_Data.CircleBulletNum; i++)
+        for (int i = 0; i < CircleBulletNum; i++)
         {
             childBullet = Bullets[i].AddComponent<EN_CircleBullet>();
             childBullet.shot = true;
-            childBullet.BulletVelocity = (Player.transform.position - Bullets[i].transform.position).normalized * EN_Data.EN_BulletSpeed * Time.deltaTime;
-            yield return new WaitForSeconds(EN_Data.CircleShotInterval);
+            childBullet.BulletSize = childBulletSize;
+            childBullet.BulletDir = (Player.transform.position - Bullets[i].transform.position);
+            childBullet.EN_BulletSpeed = childBulletSpeed;
+            yield return new WaitForSeconds(CircleShotInterval);
         }
     }
 }

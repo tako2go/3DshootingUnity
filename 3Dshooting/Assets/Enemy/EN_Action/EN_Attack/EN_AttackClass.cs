@@ -16,11 +16,11 @@ public class EN_AttackClass : MonoBehaviour
     public Transform Enemy;
     float tiemr = 0;
 
-    public void BulletStart(float BulletSizeValue)
+    public void BulletStart()
     {
         Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         Enemy = GameObject.FindWithTag("Enemy").GetComponent<Transform>();
-        this.transform.localScale = new Vector3(BulletSizeValue * 2, BulletSizeValue * 2, BulletSizeValue * 2);//直径に変換するために*2
+        this.transform.localScale = new Vector3(BulletSize, BulletSize, BulletSize);//直径に変換するために*2
     }
 
     public void nomalMove()
@@ -37,7 +37,7 @@ public class EN_AttackClass : MonoBehaviour
             BulletVelocity = BulletVelocity.normalized + accelaration.normalized * AbsoluteOfAccel;
         }
 
-        this.transform.position += BulletVelocity.normalized * EN_Data.EN_BulletSpeed * Time.deltaTime;
+        this.transform.position += BulletVelocity.normalized * EN_BulletSpeed * Time.deltaTime;
     }
 
     public void Bullethit()

@@ -1,8 +1,0 @@
-//nomal弾
-CreateNomal(GameObject BulletType, Vector3 directon, float Speed, float size)
-
-//homing弾
-CreateNomalHoming(GameObject BulletType, Vector3 directon, float Speed, float size)
-
-//CircleSimultaneous弾
-CreateCircleSimultaneous(GameObject BulletType, Vector3 directon, float Speed, float size, float CircleSimRadius, int CircleSimBulletNum)

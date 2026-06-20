@@ -7,13 +7,13 @@ public class EN_CircleSimultaneous : EN_AttackClass
     // Start is called before the first frame update
     void Start()
     {
-        BulletStart(EN_Data.EN_BulletSize);
-        BulletVelocity = BulletDir.normalized * EN_BulletSpeed * Time.deltaTime;
+        BulletStart();
     }
 
     // Update is called once per frame
     void Update()
     {
+        BulletVelocity = BulletDir.normalized * EN_BulletSpeed * Time.deltaTime;
         nomalMove();
         Bullethit();
         bulletDestroy();

@@ -17,7 +17,7 @@ public class EN_CircleWave : EN_AttackClass
 
     void Start()
     {
-        BulletStart(EN_Data.EN_BulletSize);
+        BulletStart();
         CenterPos = this.transform.position;
     }
 
