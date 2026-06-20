@@ -33,6 +33,6 @@ public class EN_Data : MonoBehaviour
     public static int CircleBulletNum = 12;
 
     //敵攻撃CircleWave関係
-    public static float CircleWaveCreateInterval = 0.5f;
     public static float CircleWaveRadius = 5.0f;
+    public static float CircleWaveRotateSpeed = 800f;
 }

@@ -1,42 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class EN_CircleWave : EN_AttackClass
 {
     // Start is called before the first frame update
 
-    private Vector3 RunDir;
-    private Vector3 RorateDir;
 
-    private Vector3 CenterPos;
+    private Vector3 CenterPos;//弾が進む中心軸
+    public float RotateSpeed;//回転スピード
+    public float CircleWaveRadius;//回転半径
 
-    private float Angle = 0;
-    private float RotateSpeed = 800;
+    private float Angle = 0;//回転角度
 
-    private float timer = 0;
+
     void Start()
     {
         BulletStart(EN_Data.EN_BulletSize);
-        BulletVelocity = -this.transform.forward * EN_Data.EN_BulletSpeed / 3 * Time.deltaTime;
         CenterPos = this.transform.position;
-        RunDir = Enemy.transform.forward;
-        RorateDir = Enemy.transform.right;
     }
 
     // Update is called once per frame
     void Update()
     {
+        BulletVelocity = BulletDir.normalized * EN_BulletSpeed * Time.deltaTime;
         circleWaveMove();
         Bullethit();
-        bulletDestroy();
+        // bulletDestroy();
     }
 
     void circleWaveMove()
     {
         CenterPos += BulletVelocity;
         Angle += RotateSpeed * Time.deltaTime;
-        Vector3 offset = Quaternion.AngleAxis(Angle, RunDir) * transform.right * EN_Data.CircleWaveRadius;
+        Vector3 offset = Quaternion.AngleAxis(Angle, BulletDir.normalized) * Vector3.Cross(BulletDir, transform.up).normalized * CircleWaveRadius;
+        //　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　↑
+        //                              Vector3.Cross(BulletDir, transform.up):外積計算　BulletDirに垂直なベクトル
         transform.position = CenterPos + offset;
     }
 }

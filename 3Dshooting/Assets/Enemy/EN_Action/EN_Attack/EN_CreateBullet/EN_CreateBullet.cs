@@ -7,15 +7,6 @@ using UnityEngine;
 
 public class EN_CreateBullet : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-    // public GameObject NomalBullet;
-    // public GameObject HomingBullet;
-    // public GameObject CircleBullet;
-    // public GameObject CircleSimBullet;
-    // public GameObject CircleWaveBullet;
-    // public GameObject FanBullet;
-
 
 
     public void CreateNomal(GameObject BulletType, Vector3 directon, float Speed, float size)//まっすぐ飛ぶ
@@ -26,6 +17,7 @@ public class EN_CreateBullet : MonoBehaviour
         bullet.EN_BulletSpeed = Speed;
         bullet.BulletSize = size;
     }
+
     public void CreateNomalHoming(GameObject BulletType, Vector3 directon, float Speed, float size)//追尾する
     {
         GameObject HomingBullet = Instantiate(BulletType, this.transform.position, Quaternion.identity);
@@ -56,19 +48,16 @@ public class EN_CreateBullet : MonoBehaviour
         parent.Bullet = BulletType;
     }
 
-    // IEnumerator CreateCircleWave(int CircleWaveBulletNum)//複数の弾が波のように円を描きながら迫ってくる
-    // {
-    //     for (int i = 0; i < CircleWaveBulletNum; i++)
-    //     {
-    //         Instantiate(CircleWaveBullet, Enemy.transform.position, Quaternion.identity);
-    //         yield return new WaitForSeconds(NumericalData.CircleWaveCreateInterval);
-    //     }
-    // }
-
-    public void CreateCircleWave(GameObject BulletType)
+    public void CreateCircleWave(GameObject BulletType, Vector3 directon, float Speed, float size, float RotSpeed, float WaveRadius)
     {
         GameObject CircleWaveBullet = Instantiate(BulletType, this.transform.position, Quaternion.identity);
-        CircleWaveBullet.AddComponent<EN_CircleWave>();
+        EN_CircleWave bullet = CircleWaveBullet.AddComponent<EN_CircleWave>();
+        bullet.BulletDir = directon;
+        bullet.EN_BulletSpeed = Speed;
+        bullet.BulletSize = size;
+        bullet.RotateSpeed = RotSpeed;
+        bullet.CircleWaveRadius = WaveRadius;
+        Debug.Log("作成したよ！");
     }
 
     public void CreateFan(GameObject BulletType, Vector3 directon, float Speed, float size, int bulletNum, float CneterDegree)//敵の位置から扇形のようにX-Z平面上に複数の弾が発射
