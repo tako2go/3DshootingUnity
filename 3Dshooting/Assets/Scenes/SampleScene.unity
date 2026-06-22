@@ -768,6 +768,7 @@ GameObject:
   m_Component:
   - component: {fileID: 980938596}
   - component: {fileID: 980938597}
+  - component: {fileID: 980938598}
   m_Layer: 0
   m_Name: TutorialEnemy
   m_TagString: Untagged
@@ -803,8 +804,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 421e360e5a9dd3447a02ab89c1235975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 0}
   Red: {fileID: 4534901266593497311, guid: 646fd7cd1ad1abb4faaf8572c81018d1, type: 3}
   Blue: {fileID: 8354528677067102570, guid: 321a746c3cce2124b96c3a90ba728d49, type: 3}
+--- !u!114 &980938598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980938594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5839e500b0851ee459e8a0acd3b03ad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1009980866
 GameObject:
   m_ObjectHideFlags: 0
