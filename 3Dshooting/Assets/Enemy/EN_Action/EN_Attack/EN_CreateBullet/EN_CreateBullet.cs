@@ -31,9 +31,7 @@ public class EN_CreateBullet : MonoBehaviour
     {
         for (int i = 0; i < CircleSimBulletNum; i++)
         {
-            // GameObject Bullet;
-            // Bullet = Instantiate(CircleSimBullet, new Vector3(this.transform.position.x + CircleSimRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), this.transform.position.x + CircleSimRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), this.transform.position.z), Quaternion.identity);
-            GameObject CircleSimultaneousXY = Instantiate(BulletType, new Vector3(this.transform.position.x + CircleSimRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), this.transform.position.x + CircleSimRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), this.transform.position.z), Quaternion.identity);
+            GameObject CircleSimultaneousXY = Instantiate(BulletType, new Vector3(this.transform.position.x + CircleSimRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), this.transform.position.y + CircleSimRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * CircleSimBulletNum)) + NumericalData.PIE / 2), this.transform.position.z), Quaternion.identity);
             EN_CircleSimultaneous bullet = CircleSimultaneousXY.AddComponent<EN_CircleSimultaneous>();
             bullet.BulletDir = directon;
             bullet.EN_BulletSpeed = Speed;
