@@ -9,8 +9,9 @@ public class EN_Data : MonoBehaviour
 
     //-----------------敵情報-----------------
     public static Vector3 BasePos = new Vector3(0, 0, 20);
-    public static Quaternion StartRot = Quaternion.Euler(0, 180, 0);
+    public static Quaternion BaseRot = Quaternion.Euler(0, 180, 0);
     public static float destinatonRadius = 1.0f;//move関数を用いたと際に目的地に到達したとみなす半径
+    public static int MobMaxNum = 3;
 
 
     //-----------------敵攻撃関係-----------------

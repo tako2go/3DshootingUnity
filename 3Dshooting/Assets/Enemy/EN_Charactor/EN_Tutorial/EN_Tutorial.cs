@@ -14,7 +14,7 @@ public class EN_Tutorial : Enemy
     {
         base.Start();
         this.transform.position = EN_Data.BasePos;
-        this.transform.rotation = EN_Data.StartRot;
+        this.transform.rotation = EN_Data.BaseRot;
         //----------------------敵行動----------------------
         //書き方:new EN_Event{ time = 前回の行動からの時間,action = () = >{実行する関数};}}
         events = new List<EN_Event>{

@@ -32,7 +32,7 @@ public class EN_Mob : Enemy
         new EN_Event{ time = 1.0f,action = ()=>{Action.Move_Shot(RandomVecto3(), eventTime = 1.5f, () => { Action.CreateFan(Blue, DirToTarget(Player.transform.position) , EN_Data.EN_BulletSpeed_Low, 0.7f, 5, 60);}, 2);}},
         new EN_Event{ time = 1.0f,action = ()=>{StartCoroutine(Action.Straight_Move(EN_Data.BasePos, eventTime = 0.5f));}},
          };
-        count = Random.Range(0, events.Count);//すべてのモブが全く同じ動きをするのではなく、開始地点が違う
+        count = Random.Range(0, events.Count);//すべての雑魚的が全く同じ動きをするのではなく、開始地点が違う
     }
 
 

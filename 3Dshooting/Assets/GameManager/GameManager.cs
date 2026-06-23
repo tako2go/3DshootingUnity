@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
         Boss_battle,//ボス戦
     }
 
-    BattlePhase NowBattlePhase;
-    EN_Manager EN_Manager;
+    public BattlePhase NowBattlePhase;
+    public EN_Manager EN_Manager;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         NowBattlePhase = BattlePhase.middle_battle;
-
     }
 
 }
