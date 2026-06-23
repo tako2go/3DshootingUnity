@@ -5,37 +5,28 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class EN_Tutorial : MonoBehaviour
-{
-    public Transform Player;
+public class EN_Tutorial : Enemy
 
-    //-----------Enemyの行動関係-----------
-    bool MoveFlag = false;
-    EN_Action Action;
-    private List<EN_Tutorial_Event> events;
-
-    //-----------生成するオブジェクト-----------
-    public GameObject Red;
-    public GameObject Blue;
-    private int count = 0;
-    private float timer = 0;
-    private float eventTime = 0;
-    void Start()
+{    //-----------生成するオブジェクト-----------
+    [SerializeField] GameObject Red;
+    [SerializeField] GameObject Blue;
+    protected override void Start()
     {
-        Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
-
+        base.Start();
         this.transform.position = EN_Data.BasePos;
         this.transform.rotation = EN_Data.StartRot;
-        Action = this.GetComponent<EN_Action>();
-        // Action.Move_Shot(new Vector3(10, 10, 20), 5, () => { Action.CreateNomalHoming(Blue, this.transform.forward, EN_Data.EN_BulletSpeed_Nomal, 1f); }, 3);
         //----------------------敵行動----------------------
-        events = new List<EN_Tutorial_Event>{
-        // new EN_Tutorial_Event{ time = 5f,action = ()=>{Action.Move_Shot(new Vector3(10, 10, 20), eventTime = 5, () => { Action.CreateNomal(Blue, this.transform.forward, EN_Data.EN_BulletSpeed_Nomal, 1f); }, 5);}},
-        // new EN_Tutorial_Event{ time = 2f,action = ()=>{Action.Move_Shot(new Vector3(-10, 10, 20), eventTime = 10, () => { Action.CreateNomalHoming(Red, DirToTarget(Player.transform.position), EN_Data.EN_BulletSpeed_High, 0.8f); }, 10);}},
-        new EN_Tutorial_Event{ time = 1.5f,action = ()=>{Action.Move_Shot(new Vector3(10, -10, 20), eventTime = 5, () => { Action.CreateCircleSimultaneous(Blue, this.transform.forward, EN_Data.EN_BulletSpeed_Low, 1f, 5f, 12); }, 5);}},
+        //書き方:new EN_Event{ time = 前回の行動からの時間,action = () = >{実行する関数};}}
+        events = new List<EN_Event>{
+        new EN_Event{ time = 0.5f,action = ()=>{Action.Move_Shot(new Vector3(10, 10, EN_Data.BasePos.z), eventTime = 5, () => { Action.CreateNomal(Blue, DirToTarget(Player.transform.position), EN_Data.EN_BulletSpeed_High, 1f); }, 10);}},
+        new EN_Event{ time = 0.5f,action = ()=>{Action.Move_Shot(new Vector3(-10, 10, EN_Data.BasePos.z), eventTime = 1.5f, () => { Action.CreateNomalHoming(Red, this.transform.forward, EN_Data.EN_BulletSpeed_Nomal, 0.8f); }, 10);}},
+        new EN_Event{ time = 0.5f,action = ()=>{Action.Move_Shot(EN_Data.BasePos, eventTime = 3, () => { Action.CreateCircleSimultaneous(Blue, DirToTarget(Player.transform.position), EN_Data.EN_BulletSpeed_Nomal, 1f, 5f, 12);
+                                                                                                         Action.CreateNomal(Blue, DirToTarget(Player.transform.position), EN_Data.EN_BulletSpeed_High, 1f);}, 5);}},
+        new EN_Event{ time = 1f,action = ()=>{StartCoroutine(Action.Straight_Move(new Vector3(0,-10,EN_Data.BasePos.z), eventTime = 0.5f));}},
+        new EN_Event{ time = 0.5f,action = ()=>{Action.Move_Shot(new Vector3(-10, 10, EN_Data.BasePos.z), eventTime = 1.5f, () => { Action.CreateFan(Blue, this.transform.forward, EN_Data.EN_BulletSpeed_Low, 0.8f, 10, 100f);}, 15);}},
          };
-
     }
+
 
     // Update is called once per frame
     void Update()

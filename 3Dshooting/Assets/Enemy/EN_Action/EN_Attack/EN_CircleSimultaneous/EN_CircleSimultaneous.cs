@@ -8,13 +8,12 @@ public class EN_CircleSimultaneous : EN_AttackClass
     void Start()
     {
         BulletStart();
-        BulletVelocity = -this.transform.forward * EN_Data.EN_BulletSpeed_Nomal * Time.deltaTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // BulletVelocity = BulletDir.normalized * EN_BulletSpeed * Time.deltaTime;
+        BulletVelocity = BulletDir.normalized * EN_BulletSpeed * Time.deltaTime;
         nomalMove();
         Bullethit();
         bulletDestroy();

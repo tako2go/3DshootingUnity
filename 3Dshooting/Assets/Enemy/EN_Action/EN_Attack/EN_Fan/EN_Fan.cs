@@ -13,7 +13,7 @@ public class EN_Fan : EN_AttackClass
     // Update is called once per frame
     void Update()
     {
-        BulletVelocity = BulletVelocity = BulletDir.normalized * EN_BulletSpeed * Time.deltaTime;
+        BulletVelocity = BulletDir.normalized * EN_BulletSpeed * Time.deltaTime;
         nomalMove();
         Bullethit();
         bulletDestroy();
