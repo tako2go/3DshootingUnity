@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EN_AttackClass : MonoBehaviour
+public class EN_Bullet : MonoBehaviour
 {
     public float BulletSize;//半径
     public float AbsoluteOfAccel;//ホーミング弾の加速度の大きさ

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EN_NomalBullet : EN_AttackClass
+public class EN_NomalBullet : EN_Bullet
 {
     // Start is called before the first frame update
     void Start()

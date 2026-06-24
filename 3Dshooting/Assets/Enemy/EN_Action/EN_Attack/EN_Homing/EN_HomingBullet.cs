@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class EN_HomingBullet : EN_AttackClass
+public class EN_HomingBullet : EN_Bullet
 {
 
     void Start()

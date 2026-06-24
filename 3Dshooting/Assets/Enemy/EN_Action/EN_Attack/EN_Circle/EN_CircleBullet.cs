@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class EN_CircleBullet : EN_AttackClass
+public class EN_CircleBullet : EN_Bullet
 {
     // Start is called before the first frame update
     public bool shot;
