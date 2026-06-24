@@ -44,7 +44,7 @@ public class EN_Mob : Enemy
 
         if (timer >= events[count].time + eventTime)
         {
-            // events[count].action?.Invoke();
+            events[count].action?.Invoke();
             timer = 0;
             count++;
             if (count >= events.Count)
@@ -57,6 +57,7 @@ public class EN_Mob : Enemy
         if (EN_HP <= 0)
         {
             EN_Manager.MobNum--;
+            EN_Manager.MobTimer = 0;
             Destroy(this.gameObject);
         }
     }

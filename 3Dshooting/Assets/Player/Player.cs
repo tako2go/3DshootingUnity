@@ -146,17 +146,15 @@ public class Player : MonoBehaviour
 
     private void shot()
     {
-        GameObject Bullet;
-        Ray ray = new Ray(CameraTf.transform.position, CameraTf.transform.forward);
-        RaycastHit hit;
-
         shotTimer += Time.deltaTime;
         if (Input.GetMouseButton(0))
         {
             if (shotTimer >= PL_Data.PL_shotInterVal)
             {
-                Vector3 BulletPos = new Vector3(transform.position.x, transform.position.y + PL_Data.PL_Height / 2, this.transform.position.z);
-                Bullet = Instantiate(PlayerBullet, BulletPos, Quaternion.identity);
+                Vector3 BulletPos = new Vector3(transform.position.x, transform.position.y + PL_Data.PL_Height / 2, this.transform.position.z) + (this.transform.forward * PL_Data.PL_Bullet_Spawn_Foward);
+                Ray ray = new Ray(CameraTf.transform.position, CameraTf.transform.forward);
+                RaycastHit hit;
+                GameObject Bullet = Instantiate(PlayerBullet, BulletPos, Quaternion.identity);
                 if (Physics.Raycast(ray, out hit, 100f))//現在は適当な値100にしている　十分すぎるため余裕があったら修正
                 {
                     Bullet.GetComponent<PL_Bullet>().vel = (hit.collider.gameObject.transform.position - BulletPos).normalized;

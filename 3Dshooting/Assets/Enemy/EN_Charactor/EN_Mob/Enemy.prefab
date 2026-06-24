@@ -162,5 +162,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EN_HP: 0
-  Red: {fileID: 0}
-  Blue: {fileID: 0}
+  Red: {fileID: 4534901266593497311, guid: 646fd7cd1ad1abb4faaf8572c81018d1, type: 3}
+  Blue: {fileID: 8354528677067102570, guid: 321a746c3cce2124b96c3a90ba728d49, type: 3}

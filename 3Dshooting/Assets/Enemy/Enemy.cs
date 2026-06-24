@@ -39,7 +39,6 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("PL_Bullet"))
         {
             EN_HP--;
-            Debug.Log("当たりました！");
             Destroy(collision.gameObject);
         }
     }
