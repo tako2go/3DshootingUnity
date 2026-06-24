@@ -51,10 +51,10 @@ public class EN_Bullet : MonoBehaviour
         }
     }
 
-    public void bulletDestroy()//指定の範囲から出たら削除
+    public void bulletDestroy()//指定の範囲から出たら削除 指定の時間を超えたら削除
     {
         tiemr += Time.deltaTime;
-        if ((this.transform.position.y <= (-NumericalData.MoveBoxY / 2) * 1.5f || this.transform.position.z <= (-NumericalData.MoveBoxZ / 2) * 1.5f) || tiemr >= 30f)
+        if ((this.transform.position.y <= (-NumericalData.MoveBoxY / 2) * 1.5f || this.transform.position.z <= (-NumericalData.MoveBoxZ / 2) * 1.5f) || tiemr >= EN_Data.EN_Bullet_DeleteTime)
         {
             Destroy(this.gameObject);
         }

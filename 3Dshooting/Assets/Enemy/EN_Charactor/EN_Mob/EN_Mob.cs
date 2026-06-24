@@ -13,10 +13,13 @@ public class EN_Mob : Enemy
     private float EnableMoveX = NumericalData.MoveBoxX / 2;//移動範囲
     private float EnableMoveY = NumericalData.MoveBoxY / 2;
 
+    EN_Manager EN_Manager;
     protected override void Start()
     {
         base.Start();
-        EN_HP = 3;        //----------------------敵行動----------------------
+        EN_HP = 3;
+        EN_Manager = GameObject.FindWithTag("EN_Manager").GetComponent<EN_Manager>();
+        //----------------------敵行動----------------------
         //書き方:new EN_Event{ time = 前回の行動からの時間,action = () = >{実行する関数};}}
         events = new List<EN_Event>{
         new EN_Event{ time = 1.0f,action = ()=>{Action.Move_Shot(RandomVecto3(), eventTime = 3, () => { Action.CreateNomal(Blue, DirToTarget(Player.transform.position), EN_Data.EN_BulletSpeed_Nomal, 1f); }, 5);}},
@@ -35,15 +38,13 @@ public class EN_Mob : Enemy
         count = Random.Range(0, events.Count);//すべての雑魚的が全く同じ動きをするのではなく、開始地点が違う
     }
 
-
-    // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
 
         if (timer >= events[count].time + eventTime)
         {
-            events[count].action?.Invoke();
+            // events[count].action?.Invoke();
             timer = 0;
             count++;
             if (count >= events.Count)
@@ -52,7 +53,15 @@ public class EN_Mob : Enemy
             }
 
         }
+
+        if (EN_HP <= 0)
+        {
+            EN_Manager.MobNum--;
+            Destroy(this.gameObject);
+        }
     }
+
+
 
     Vector3 DirToTarget(Vector3 Target)
     {

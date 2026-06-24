@@ -10,10 +10,10 @@ public class Player : MonoBehaviour
 {
 
     //Cameraプロパティ
-    public Transform CameraAxisTf;
-    public Transform CameraTf;
+    [SerializeField] Transform CameraAxisTf;
+    [SerializeField] Transform CameraTf;
 
-    private Quaternion CameraRotation = Quaternion.Euler(0, 0, 0);
+
 
     Rigidbody rb;
 
@@ -27,8 +27,8 @@ public class Player : MonoBehaviour
 
         this.transform.position = new Vector3(0, 0, 0);
         CameraAxisTf.transform.position = this.transform.position;
-        CameraTf.transform.position = this.transform.position + NumericalData.CameraStartPosition;
-        CameraTf.transform.rotation = CameraRotation;
+        CameraTf.transform.position = this.transform.position + PL_Data.CameraStartPosition;
+        CameraTf.transform.rotation = PL_Data.CameraRotation;
     }
 
     // Update is called once per frame
@@ -123,11 +123,12 @@ public class Player : MonoBehaviour
 
     float AngleX = 0;
     float AngleY = 0;
+
+    public int RotateSpeed = 150;
     private void CamerapPos()
     {
         CameraAxisTf.transform.position = this.transform.position;
 
-        const int RotateSpeed = 300;
 
         float mouseInputX = Input.GetAxis("Mouse X");
         float mouseInputY = Input.GetAxis("Mouse Y");

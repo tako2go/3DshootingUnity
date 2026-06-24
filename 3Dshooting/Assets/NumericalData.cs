@@ -11,8 +11,4 @@ public static class NumericalData
     public static int MoveBoxX = 30;//移動可能範囲(直径)
     public static int MoveBoxY = 15;
     public static int MoveBoxZ = 15;
-
-    //カメラ情報
-    public static Vector3 CameraStartPosition = new Vector3(0, 1.5f, -5);
-
 }

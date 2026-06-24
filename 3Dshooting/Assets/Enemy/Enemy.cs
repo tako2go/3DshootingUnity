@@ -28,6 +28,21 @@ public class Enemy : MonoBehaviour
         Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         Action = this.GetComponent<EN_Action>();
     }
+
+    protected virtual void Update()
+    {
+
+    }
+
+    void OnCollisionEnter(Collision collision)//当たり判定
+    {
+        if (collision.gameObject.CompareTag("PL_Bullet"))
+        {
+            EN_HP--;
+            Debug.Log("当たりました！");
+            Destroy(collision.gameObject);
+        }
+    }
 }
 
 

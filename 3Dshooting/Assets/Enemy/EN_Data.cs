@@ -11,8 +11,10 @@ public class EN_Data : MonoBehaviour
     public static Vector3 BasePos = new Vector3(0, 0, 20);
     public static Quaternion BaseRot = Quaternion.Euler(0, 180, 0);
     public static float destinatonRadius = 1.0f;//move関数を用いたと際に目的地に到達したとみなす半径
-    public static int MobMaxNum = 3;
 
+    //-----------------雑魚的情報-----------------
+    public static int MobMaxNum = 3;
+    public static float MobApperTime = 1.0f;
 
     //-----------------敵攻撃関係-----------------
     //サイズ関係
@@ -22,6 +24,7 @@ public class EN_Data : MonoBehaviour
     public static float EN_BulletSpeed_Low = 5f;
     public static float EN_BulletSpeed_Nomal = 15f;
     public static float EN_BulletSpeed_High = 30f;
+    public static float EN_Bullet_DeleteTime = 30f;
 
 
     //敵攻撃homing関係

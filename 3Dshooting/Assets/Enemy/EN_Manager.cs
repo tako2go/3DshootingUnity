@@ -6,17 +6,18 @@ using UnityEngine;
 public class EN_Manager : MonoBehaviour
 {
     GameManager GameManager;
-    public Dictionary<EN_Name, GameObject> enemies = new Dictionary<EN_Name, GameObject>();
+
+    //----------敵オブジェクト----------
     [SerializeField] GameObject EN_Tutorial;
     [SerializeField] GameObject EN_Mob;
     [SerializeField] GameObject EN_Boss;
 
-    public int MobNum = 0;
+
+    //------------中盤---------------
+    public int MobNum = 0;//現在の雑魚敵の数
+    public float MobTimer = EN_Data.MobApperTime;//雑魚敵が死んでから経った時間
     void Start()
     {
-        enemies.Add(EN_Name.EN_Tutorial, EN_Tutorial);
-        enemies.Add(EN_Name.EN_Mob, EN_Mob);
-        enemies.Add(EN_Name.EN_Boss, EN_Boss);
         GameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
     }
 
@@ -26,9 +27,10 @@ public class EN_Manager : MonoBehaviour
         switch (GameManager.NowBattlePhase)
         {
             case GameManager.BattlePhase.middle_battle://中盤
-                if (MobNum < EN_Data.MobMaxNum)//雑魚敵の数が最大値より少なかったら
+                MobTimer += Time.deltaTime;
+                if (MobNum < EN_Data.MobMaxNum & MobTimer >= EN_Data.MobApperTime)//雑魚敵の数が最大値より少なかったら
                 {
-                    SpawnEnemy(EN_Name.EN_Mob,
+                    SpawnEnemy(EN_Mob,
                     new Vector3(UnityEngine.Random.Range(-NumericalData.MoveBoxX / 2, NumericalData.MoveBoxX / 2), UnityEngine.Random.Range(-NumericalData.MoveBoxY / 2, NumericalData.MoveBoxY / 2), EN_Data.BasePos.z));
                     MobNum++;
                 }
@@ -37,9 +39,9 @@ public class EN_Manager : MonoBehaviour
     }
 
 
-    public void SpawnEnemy(EN_Name Enemy, Vector3 Pos)
+    public void SpawnEnemy(GameObject Enemy, Vector3 Pos)
     {
-        Instantiate(enemies[Enemy], Pos, EN_Data.BaseRot);
+        Instantiate(Enemy, Pos, EN_Data.BaseRot);
     }
 
     public enum EN_Name

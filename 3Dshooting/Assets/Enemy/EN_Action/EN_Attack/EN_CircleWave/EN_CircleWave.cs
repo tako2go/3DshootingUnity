@@ -27,7 +27,7 @@ public class EN_CircleWave : EN_Bullet
         BulletVelocity = BulletDir.normalized * EN_BulletSpeed * Time.deltaTime;
         circleWaveMove();
         Bullethit();
-        // bulletDestroy();
+        bulletDestroy();
     }
 
     void circleWaveMove()

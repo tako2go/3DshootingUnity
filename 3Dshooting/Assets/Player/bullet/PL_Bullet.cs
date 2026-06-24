@@ -19,9 +19,11 @@ public class PL_Bullet : MonoBehaviour
     {
         this.transform.position += vel * PL_Data.PL_BulletSpeed * Time.deltaTime;
         timer += Time.deltaTime;
-        if (timer > PL_Data.PL_BulletTime)//
+        if (timer > PL_Data.PL_Bullet_DeleteTime)//
         {
             Destroy(this.gameObject);
         }
     }
+
+
 }
