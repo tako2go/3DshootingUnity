@@ -8,14 +8,18 @@ public class EN_Manager : MonoBehaviour
     GameManager GameManager;
 
     //----------敵オブジェクト----------
-    [SerializeField] GameObject EN_Tutorial;
-    [SerializeField] GameObject EN_Mob;
-    [SerializeField] GameObject EN_Boss;
+    public GameObject EN_Tutorial;
+    public GameObject EN_Mob;
+    public GameObject EN_Boss;
 
 
     //------------中盤---------------
     public int MobNum = 0;//現在の雑魚敵の数
     public float MobTimer = EN_Data.MobApperTime;//雑魚敵が死んでから経った時間
+
+    //------------ボス戦---------------
+    bool BossFlag = false;
+
     void Start()
     {
         GameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
@@ -30,18 +34,21 @@ public class EN_Manager : MonoBehaviour
                 MobTimer += Time.deltaTime;
                 if (MobNum < EN_Data.MobMaxNum & MobTimer >= EN_Data.MobApperTime)//雑魚敵の数が最大値より少なかったら
                 {
-                    SpawnEnemy(EN_Mob,
-                    new Vector3(UnityEngine.Random.Range(-NumericalData.MoveBoxX / 2, NumericalData.MoveBoxX / 2), UnityEngine.Random.Range(-NumericalData.MoveBoxY / 2, NumericalData.MoveBoxY / 2), EN_Data.BasePos.z));
+                    SpawnEnemy(EN_Mob);
                     MobNum++;
                 }
+                break;
+
+            case GameManager.BattlePhase.Boss_battle:
+
                 break;
         }
     }
 
 
-    public void SpawnEnemy(GameObject Enemy, Vector3 Pos)
+    public void SpawnEnemy(GameObject Enemy)
     {
-        Instantiate(Enemy, Pos, EN_Data.BaseRot);
+        Instantiate(Enemy, EN_Data.BasePos, EN_Data.BaseRot);
     }
 
     public enum EN_Name

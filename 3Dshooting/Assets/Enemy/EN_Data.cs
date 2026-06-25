@@ -13,7 +13,7 @@ public class EN_Data : MonoBehaviour
     public static float destinatonRadius = 1.0f;//move関数を用いたと際に目的地に到達したとみなす半径
 
     //-----------------雑魚的情報-----------------
-    public static int MobMaxNum = 3;
+    public static int MobMaxNum = 1;
     public static float MobApperTime = 1.0f;
 
     //-----------------敵攻撃関係-----------------

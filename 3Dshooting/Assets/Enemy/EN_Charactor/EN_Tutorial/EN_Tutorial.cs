@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -29,23 +30,8 @@ public class EN_Tutorial : Enemy
 
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        timer += Time.deltaTime;
-        if (count < events.Count)
-        {
-            if (timer >= events[count].time + eventTime)
-            {
-                events[count].action?.Invoke();
-                count++;
-                timer = 0;
-            }
-
-        }
-    }
-
-    Vector3 DirToTarget(Vector3 Target)
-    {
-        return Target - this.transform.position;
+        base.Update();
     }
 }

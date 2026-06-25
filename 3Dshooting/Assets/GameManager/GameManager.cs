@@ -18,18 +18,20 @@ public class GameManager : MonoBehaviour
     }
 
     public BattlePhase NowBattlePhase;
-    public EN_Manager EN_Manager;
+    private EN_Manager EN_Manager;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         EN_Manager = GameObject.FindWithTag("EN_Manager").GetComponent<EN_Manager>();
-        NowBattlePhase = BattlePhase.Tutorial_battle;
+
+        NowBattlePhase = BattlePhase.middle_battle;
+        // EN_Manager.SpawnEnemy(EN_Manager.EN_Boss);
     }
 
     void Update()
     {
-        NowBattlePhase = BattlePhase.middle_battle;
+
     }
 
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Security;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -31,6 +32,20 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
+        timer += Time.deltaTime;
+        if (count < events.Count - 1)
+        {
+            if (timer >= events[count].time)
+            {
+                events[count].action?.Invoke();
+                count++;
+            }
+        }
+        else
+        {
+            count = 0;
+            timer = 0;
+        }
 
     }
 
@@ -42,7 +57,18 @@ public class Enemy : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+
+    protected Vector3 DirToTarget(Vector3 Target)
+    {
+        return Target - this.transform.position;
+    }
+
+    protected float ConvertTime(float IntervalTime)//前回の行動からの時間をいれると、その行動の時間にしてくれる
+    {
+        return timer + eventTime + IntervalTime;
+    }
 }
+
 
 
 public class EN_Event//敵の行動の実行時間と
