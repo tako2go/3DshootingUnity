@@ -13,9 +13,11 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public int EN_HP;
 
     //-----------Enemyの行動関係-----------
+    protected int now_phase = 0;
     protected bool MoveFlag = false;
     protected EN_Action Action;
     protected List<EN_Event> events;
+    protected List<EN_Phase> phase;
 
     protected float EnableMoveX = NumericalData.MoveBoxX / 2;//移動範囲
     protected float EnableMoveY = NumericalData.MoveBoxY / 2;
@@ -30,22 +32,22 @@ public class Enemy : MonoBehaviour
     {
         Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         Action = this.GetComponent<EN_Action>();
+
     }
 
     protected virtual void Update()
     {
         timer += Time.deltaTime;
 
-        if (timer >= events[eventCount].time + eventTime)
+        if (timer >= phase[now_phase].events[eventCount].time + eventTime)
         {
-            events[eventCount].action?.Invoke();
+            phase[now_phase].events[eventCount].action?.Invoke();
             timer = 0;
             eventCount++;
-            if (eventCount >= events.Count)
+            if (eventCount >= phase[now_phase].events.Count)
             {
                 eventCount = 0;
             }
-
         }
     }
 
@@ -63,10 +65,10 @@ public class Enemy : MonoBehaviour
         return Target - this.transform.position;
     }
 
-    protected float ConvertTime(int index, float IntervalTime)//前回の行動からの時間をいれると、その行動の時間にしてくれる
-    {
-        return timer + events[index - 1].eventTime;
-    }
+    // protected float ConvertTime(int index, float IntervalTime)//前回の行動からの時間をいれると、その行動の時間にしてくれる
+    // {
+    //     return timer + events[index - 1].eventTime;
+    // }
 
     protected Vector3 RandomVecto3()
     {
@@ -74,7 +76,10 @@ public class Enemy : MonoBehaviour
     }
 }
 
-
+public class EN_Phase
+{
+    public List<EN_Event> events;
+}
 
 public class EN_Event//敵の行動の実行時間と
 {

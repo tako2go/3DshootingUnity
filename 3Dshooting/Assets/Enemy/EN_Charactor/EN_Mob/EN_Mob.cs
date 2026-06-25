@@ -21,7 +21,11 @@ public class EN_Mob : Enemy
         EN_Manager = GameObject.FindWithTag("EN_Manager").GetComponent<EN_Manager>();
         //----------------------敵行動----------------------
         //書き方:new EN_Event{ time = 実行する時間,action = () = >{実行する関数};}}
-        events = new List<EN_Event>{
+        phase = new List<EN_Phase>
+        {
+            new EN_Phase
+            {
+                 events = new List<EN_Event>{
         new EN_Event{ time = 1.0f,action = ()=>{Action.Move_Shot(RandomVecto3(), eventTime = 3, () => { Action.CreateNomal(Blue, DirToTarget(Player.transform.position), EN_Data.EN_BulletSpeed_Nomal, 1f); }, 5);}},
         new EN_Event{ time = 1.0f,action = ()=>{Action.Move_Shot(RandomVecto3(), eventTime = 1.5f, () => { Action.CreateNomalHoming(Red, this.transform.forward, EN_Data.EN_BulletSpeed_Nomal, 0.8f); }, 10);}},
         new EN_Event{ time = 1.0f,action = ()=>{Action.Move_Shot(EN_Data.BasePos, eventTime = 3, () => { Action.CreateCircleSimultaneous(Blue, DirToTarget(Player.transform.position), EN_Data.EN_BulletSpeed_Nomal, 1f, 5f, 12);
@@ -34,8 +38,11 @@ public class EN_Mob : Enemy
         new EN_Event{ time = 0f,action = ()=>{Action.Move_Shot(new Vector3(EnableMoveX,this.transform.position.y,EN_Data.BasePos.z), eventTime = 10, () => { Action.CreateNomal(Blue, this.transform.forward, EN_Data.EN_BulletSpeed_Low, 1f); }, 10);}},
         new EN_Event{ time = 1.0f,action = ()=>{Action.Move_Shot(RandomVecto3(), eventTime = 1.5f, () => { Action.CreateFan(Blue, DirToTarget(Player.transform.position) , EN_Data.EN_BulletSpeed_Low, 0.7f, 5, 60);}, 2);}},
         new EN_Event{ time = 1.0f,action = ()=>{StartCoroutine(Action.Straight_Move(EN_Data.BasePos, eventTime = 0.5f));}},
-         };
-        eventCount = UnityEngine.Random.Range(0, events.Count);//すべての雑魚的が全く同じ動きをするのではなく、開始地点が違う
+         }
+            }
+        };
+
+        eventCount = UnityEngine.Random.Range(0, phase[now_phase].events.Count);//すべての雑魚的が全く同じ動きをするのではなく、開始地点が違う
     }
     protected override void Update()
     {
