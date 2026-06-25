@@ -13,12 +13,26 @@ public class EN_Action : EN_CreateBullet
 
     public IEnumerator Attack(int Action_Num, float time, Action ActionFun)// 引数:(実行する回数(弾数),かける時間,実行する関数)
     {
-        float Shot_Interval = time / Action_Num;
-        for (int i = 0; i < Action_Num; i++)
+        if (Action_Num == 1)
         {
+            yield return new WaitForSeconds(time / 2);
             ActionFun?.Invoke();
-            yield return new WaitForSeconds(Shot_Interval);
         }
+        else if (Action_Num > 1)
+        {
+            float Shot_Interval = time / (Action_Num - 1);
+            for (int i = 0; i < Action_Num; i++)
+            {
+                ActionFun?.Invoke();
+                yield return new WaitForSeconds(Shot_Interval);
+            }
+        }
+        else
+        {
+            yield break;
+        }
+
+
     }
 
     public IEnumerator Straight_Move(Vector3 destination, float time)//直線移動 引数:(目的地,かける時間)
