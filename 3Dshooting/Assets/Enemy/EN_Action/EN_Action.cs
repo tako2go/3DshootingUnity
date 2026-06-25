@@ -13,7 +13,7 @@ public class EN_Action : EN_CreateBullet
 
     public IEnumerator Attack(int Action_Num, float time, Action ActionFun)// 引数:(実行する回数(弾数),かける時間,実行する関数)
     {
-        if (Action_Num == 1)
+        if (Action_Num == 1)//弾の発射が一回の時
         {
             yield return new WaitForSeconds(time / 2);
             ActionFun?.Invoke();
