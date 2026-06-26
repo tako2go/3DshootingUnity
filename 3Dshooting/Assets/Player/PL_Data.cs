@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 public static class PL_Data
 {
     //プレイヤー情報
-    public static int PL_Speed = 8;
+    public static int PL_Speed = 400;
     //プレイヤーサイズ(円柱とする)
     public static float PL_Radius = 0.25f;//底面半径
     public static float PL_Height = 0.5f;//高さの半分

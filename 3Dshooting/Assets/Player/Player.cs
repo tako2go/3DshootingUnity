@@ -51,19 +51,19 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            dir += CameraTf.transform.forward;
+            dir += new Vector3(CameraTf.transform.forward.x, 0, CameraTf.transform.forward.z);//xz平面について
         }
         if (Input.GetKey(KeyCode.A))
         {
-            dir -= CameraTf.transform.right;
+            dir -= new Vector3(CameraTf.transform.right.x, 0, CameraTf.transform.right.z);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            dir -= CameraTf.transform.forward;
+            dir -= new Vector3(CameraTf.transform.forward.x, 0, CameraTf.transform.forward.z);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            dir += CameraTf.transform.right;
+            dir += new Vector3(CameraTf.transform.right.x, 0, CameraTf.transform.right.z);
         }
 
         if (Input.GetKey(KeyCode.Space))
@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
             dir -= this.transform.up;
         }
 
-        vel = dir.normalized;
+        vel = dir.normalized;//移動方向保存
 
         if (!Input.GetMouseButton(1))
         {
@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
 
         if (Mathf.Abs(this.transform.position.x) >= (NumericalData.MoveBoxX / 2) - PL_Data.PL_Radius)
         {
-            if (this.transform.position.x * dir.x > 0)//中心に対して右、左としたとき、速度方向(x)と現在位置の左右が同じだった場合停止
+            if (this.transform.position.x * vel.x > 0)//中心に対して右、左としたとき、速度方向(x)と現在位置の左右が同じだった場合停止
             {
                 vel.x = 0;
             }
@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
 
         if (Mathf.Abs(this.transform.position.z) >= (NumericalData.MoveBoxZ / 2) - PL_Data.PL_Radius)//�ړ��͈͐���
         {
-            if (this.transform.position.z * dir.z > 0)
+            if (this.transform.position.z * vel.z > 0)
             {
                 vel.z = 0;
             }
@@ -109,16 +109,17 @@ public class Player : MonoBehaviour
 
         if (Mathf.Abs(this.transform.position.y) >= (NumericalData.MoveBoxY / 2) - PL_Data.PL_Height)//�ړ��͈͐���
         {
-            if (this.transform.position.y * dir.y > 0)
+            if (this.transform.position.y * vel.y > 0)
             {
                 vel.y = 0;
+                Debug.Log("止めてやる！");
             }
+            Debug.Log("やばい！");
         }
 
 
 
-        rb.velocity = vel.normalized * PL_Data.PL_Speed;
-
+        rb.velocity = vel.normalized * PL_Data.PL_Speed * Time.deltaTime;
     }
 
     float AngleX = 0;
