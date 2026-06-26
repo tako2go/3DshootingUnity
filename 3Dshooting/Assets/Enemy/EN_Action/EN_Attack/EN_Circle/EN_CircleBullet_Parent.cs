@@ -52,7 +52,7 @@ public class EN_CircleBullet_Parent : MonoBehaviour
 
         for (int i = 0; i < CircleBulletNum; i++)
         {
-            Bullets[i] = Instantiate(Bullet, new Vector3(this.transform.position.x + CircleRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * CircleBulletNum)) + NumericalData.PIE / 2), this.transform.position.x + CircleRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * CircleBulletNum)) + NumericalData.PIE / 2), this.transform.position.z), Quaternion.identity, this.transform);
+            Bullets[i] = Instantiate(Bullet, new Vector3(this.transform.position.x + CircleRadius * Mathf.Cos(-((i * 360 * NumericalData.PIE) / (180 * CircleBulletNum)) + NumericalData.PIE / 2), this.transform.position.y + CircleRadius * Mathf.Sin(-((i * 360 * NumericalData.PIE) / (180 * CircleBulletNum)) + NumericalData.PIE / 2), this.transform.position.z), Quaternion.identity, this.transform);
             yield return new WaitForSeconds(CircleCreateInterval);
         }
         StartShotFlag = true;

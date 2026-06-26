@@ -10,7 +10,8 @@ public class Enemy : MonoBehaviour
     protected Transform Player;
 
     //-----------Enemyの行動関係-----------
-    [HideInInspector] public int EN_HP;
+    public int EN_HP;
+    protected int EN_MaxHP;
 
     //-----------Enemyの行動関係-----------
     protected int now_phase = 0;
@@ -38,15 +39,16 @@ public class Enemy : MonoBehaviour
     protected virtual void Update()
     {
         timer += Time.deltaTime;
-
+        // Debug.Log(eventCount);
         if (timer >= phase[now_phase].events[eventCount].time + eventTime)
         {
             phase[now_phase].events[eventCount].action?.Invoke();
+
             eventCount++;
+            timer = 0;
             if (eventCount >= phase[now_phase].events.Count)
             {
                 eventCount = 0;
-                timer = 0;
             }
         }
     }
@@ -74,11 +76,16 @@ public class Enemy : MonoBehaviour
     {
         return new Vector3(UnityEngine.Random.Range(-EnableMoveX, EnableMoveX), UnityEngine.Random.Range(-EnableMoveY, EnableMoveY), EN_Data.BasePos.z);//移動可能範囲内でランダムな位置を生成
     }
+
+    protected void AddEvent(int index, EN_Event Added_event)//index:phase Added_event:行動
+    {
+        phase[index].events.Add(Added_event);
+    }
 }
 
 public class EN_Phase
 {
-    public List<EN_Event> events;
+    public List<EN_Event> events = new List<EN_Event>();
 }
 
 public class EN_Event//敵の行動の実行時間と

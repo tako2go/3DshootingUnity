@@ -40,7 +40,16 @@ public class EN_Action : EN_CreateBullet
     public IEnumerator Straight_Move(Vector3 destination, float time)//直線移動 引数:(目的地,かける時間)
     {
         bool MoveFlag;
-        float speed = (destination - this.transform.position).magnitude / time;
+        float speed;
+        if (time != 0)
+        {
+            speed = (destination - this.transform.position).magnitude / time;
+        }
+        else
+        {
+            speed = 0;
+        }
+
         Vector3 Velocity = Vector3.zero;
         MoveFlag = ((destination - this.transform.position).sqrMagnitude > EN_Data.destinatonRadius * EN_Data.destinatonRadius);
 

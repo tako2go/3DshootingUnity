@@ -18,7 +18,7 @@ public class EN_Data : MonoBehaviour
 
     //-----------------敵攻撃関係-----------------
     //サイズ関係
-    public static float EN_BulletSize = 0.5f;//弾の半径
+    public static float EN_BulletSize_Nomal = 0.5f;//弾の半径
 
     //速度関係
     public static float EN_BulletSpeed_Low = 5f;

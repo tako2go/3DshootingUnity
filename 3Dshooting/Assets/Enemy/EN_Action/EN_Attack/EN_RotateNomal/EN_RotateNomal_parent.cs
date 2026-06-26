@@ -13,7 +13,8 @@ public class EN_RotateNomal_parent : MonoBehaviour
     public float execution_time;//実行する全体の時間
     public float childBulletSpeed;
     public float childBulletSize;
-    public bool BulletFlag = false;//すべての子オブジェクトがNullだとfalse
+    private bool BulletFlag = false;//すべての子オブジェクトがNullだとfalse
+    private bool ShotFlag = false;//一発でも発射したらtrue
     //---------フラグ関係---------
     public GameObject Bullet;//弾の見た目
     public GameObject[] Bullets;
@@ -25,11 +26,15 @@ public class EN_RotateNomal_parent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < BulletNum; i++)
+        if (ShotFlag)
         {
-            if (Bullets[i] != null)
+            BulletFlag = false;
+            for (int i = 0; i < BulletNum; i++)
             {
-                BulletFlag = true;
+                if (Bullets[i] != null)
+                {
+                    BulletFlag = true;
+                }
             }
         }
         if (BulletFlag == false)
@@ -50,6 +55,7 @@ public class EN_RotateNomal_parent : MonoBehaviour
             childBullet.BulletSize = childBulletSize;
             childBullet.BulletDir = Vector3.Lerp(Start_directon, end_direction, (float)i / BulletNum).normalized;
             childBullet.EN_BulletSpeed = childBulletSpeed;
+            ShotFlag = true;
             yield return new WaitForSeconds(execution_time / BulletNum);
         }
     }

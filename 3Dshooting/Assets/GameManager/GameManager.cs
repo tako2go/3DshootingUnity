@@ -25,8 +25,8 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         EN_Manager = GameObject.FindWithTag("EN_Manager").GetComponent<EN_Manager>();
 
-        NowBattlePhase = BattlePhase.middle_battle;
-        // EN_Manager.SpawnEnemy(EN_Manager.EN_Boss);
+        NowBattlePhase = BattlePhase.Boss_battle;
+        EN_Manager.SpawnEnemy(EN_Manager.EN_Boss);
     }
 
     void Update()

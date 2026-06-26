@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6740376363630579642}
   - component: {fileID: 7094029973317853330}
   - component: {fileID: 5830112657773873832}
+  - component: {fileID: -7087385495192938224}
   m_Layer: 0
   m_Name: "Boss(\u4EEE)"
   m_TagString: Enemy
@@ -148,3 +149,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5839e500b0851ee459e8a0acd3b03ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-7087385495192938224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806409067590960209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4cb47376e9acc9478fc65c8b5a41b85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EN_HP: 0
+  Red: {fileID: 4534901266593497311, guid: 646fd7cd1ad1abb4faaf8572c81018d1, type: 3}
+  Blue: {fileID: 8354528677067102570, guid: 321a746c3cce2124b96c3a90ba728d49, type: 3}
+  Circle_Parent: {fileID: 4534901266593497311, guid: 646fd7cd1ad1abb4faaf8572c81018d1, type: 3}
+  RotateNomal_Parent: {fileID: 4534901266593497311, guid: 646fd7cd1ad1abb4faaf8572c81018d1, type: 3}
