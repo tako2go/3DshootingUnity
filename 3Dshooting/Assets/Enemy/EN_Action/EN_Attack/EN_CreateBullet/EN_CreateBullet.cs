@@ -18,6 +18,19 @@ public class EN_CreateBullet : MonoBehaviour
         bullet.BulletSize = size;
     }
 
+    public void CreateRotateNomal(GameObject ParentType, GameObject BulletType, Vector3 Start_directon, Vector3 end_direction, float time, int bulletNum, float Speed, float size)//角度を変えながら撃つ
+    {
+        GameObject RotateNomal_Parent = Instantiate(ParentType, this.transform.position, Quaternion.identity);
+        EN_RotateNomal_parent parent = RotateNomal_Parent.AddComponent<EN_RotateNomal_parent>();
+        parent.Bullet = BulletType;
+        parent.childBulletSpeed = Speed;
+        parent.childBulletSize = size;
+        parent.Start_directon = Start_directon;
+        parent.end_direction = end_direction;
+        parent.execution_time = time;
+        parent.BulletNum = bulletNum;
+    }
+
     public void CreateNomalHoming(GameObject BulletType, Vector3 directon, float Speed, float size)//追尾する
     {
         GameObject HomingBullet = Instantiate(BulletType, this.transform.position, Quaternion.identity);

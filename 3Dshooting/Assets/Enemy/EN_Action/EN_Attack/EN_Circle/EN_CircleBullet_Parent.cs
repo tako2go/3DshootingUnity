@@ -19,7 +19,7 @@ public class EN_CircleBullet_Parent : MonoBehaviour
     public float CircleCreateInterval;
     public float CircleShotInterval;
     //---------フラグ関係---------
-    public GameObject Bullet;
+    public GameObject Bullet;//弾の見た目
     public GameObject[] Bullets;
 
 

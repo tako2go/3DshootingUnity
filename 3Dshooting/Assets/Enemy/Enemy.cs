@@ -42,11 +42,11 @@ public class Enemy : MonoBehaviour
         if (timer >= phase[now_phase].events[eventCount].time + eventTime)
         {
             phase[now_phase].events[eventCount].action?.Invoke();
-            timer = 0;
             eventCount++;
             if (eventCount >= phase[now_phase].events.Count)
             {
                 eventCount = 0;
+                timer = 0;
             }
         }
     }

@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EN_Action : EN_CreateBullet
 {
+
     public void Move_Shot(Vector3 destination, float time, Action ActionFun, int Action_Num)//移動しながら弾を撃つ 引数:(目的地,かける時間,実行する関数,実行する回数(弾数))
     {
         StartCoroutine(Straight_Move(destination, time));
