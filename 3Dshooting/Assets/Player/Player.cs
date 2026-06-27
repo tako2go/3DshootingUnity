@@ -112,14 +112,12 @@ public class Player : MonoBehaviour
             if (this.transform.position.y * vel.y > 0)
             {
                 vel.y = 0;
-                Debug.Log("止めてやる！");
             }
-            Debug.Log("やばい！");
         }
 
 
 
-        rb.velocity = vel.normalized * PL_Data.PL_Speed * Time.deltaTime;
+        this.transform.position += vel.normalized * PL_Data.PL_Speed * Time.deltaTime;
     }
 
     float AngleX = 0;

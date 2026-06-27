@@ -53,22 +53,23 @@ public class EN_Boss : Enemy
         }
 
         //--------------フェーズ0--------------
-        AddEvent(0, new EN_Event { time = 1.0f, action = () => { Action.Move_Shot(RandomVecto3(), eventTime = 6, () => { Action.CreateNomal(Blue, DirToTarget(Player.transform.position), EN_Data.EN_BulletSpeed_Nomal, EN_Data.EN_BulletSize_Nomal); }, 20); } });
-        AddEvent(0, new EN_Event
-        {
-            time = 1.0f,
-            action = () =>
-            {
-                Action.Move_Shot(RandomVecto3(), eventTime = 3, () =>
-                {
-                    Action.CreateNomalHoming(Red, this.transform.forward, EN_Data.EN_BulletSpeed_Low, EN_Data.EN_BulletSize_Nomal * 0.8f);
-                    Action.CreateFan(Blue, DirToTarget(Player.transform.position), EN_Data.EN_BulletSpeed_Low, EN_Data.EN_BulletSize_Nomal * 0.7f, 12, 60);
-                }, 3);
-            }
-        });
-        AddEvent(0, new EN_Event { time = 0.5f, action = () => { StartCoroutine(Action.Straight_Move(new Vector3(EnableMoveX, Player.transform.position.y, EN_Data.BasePos.z), eventTime = 0.5f)); } });
-        for (int i = 20; i > 0; i--) { int copy = i; AddEvent(0, new EN_Event { time = 0.15f, action = () => { Action.Move_Shot(EN_Data.BasePos, eventTime = 0f, () => { Action.CreateCircleSimultaneous(Blue, DirToTarget(Player.transform.position), EN_Data.EN_BulletSpeed_Nomal, EN_Data.EN_BulletSize_Nomal, copy / 3, 12); }, 1); } }); }//キャプチャ問題対策でcopy変数を作成 iをつかうと同じ変数であるため、最終的にi = 21となったiしか参照しない
-        for (int i = 1; i <= 20; i++) { int copy = i; AddEvent(0, new EN_Event { time = 0.15f, action = () => { Action.Move_Shot(EN_Data.BasePos, eventTime = 0f, () => { Action.CreateCircleSimultaneous(Blue, DirToTarget(Player.transform.position), EN_Data.EN_BulletSpeed_Nomal, EN_Data.EN_BulletSize_Nomal, copy / 3, 12); }, 1); } }); }
+        // AddEvent(0, new EN_Event { time = 1.0f, action = () => { Action.Move_Shot(RandomVecto3(), eventTime = 6, () => { Action.CreateNomal(Blue, DirToTarget(Player.transform.position), EN_Data.EN_BulletSpeed_Nomal, EN_Data.EN_BulletSize_Nomal); }, 20); } });
+        // AddEvent(0, new EN_Event
+        // {
+        //     time = 1.0f,
+        //     action = () =>
+        //     {
+        //         Action.Move_Shot(RandomVecto3(), eventTime = 3, () =>
+        //         {
+        //             Action.CreateNomalHoming(Red, this.transform.forward, EN_Data.EN_BulletSpeed_Low, EN_Data.EN_BulletSize_Nomal * 0.8f);
+        //             Action.CreateFan(Blue, DirToTarget(Player.transform.position), EN_Data.EN_BulletSpeed_Low, EN_Data.EN_BulletSize_Nomal * 0.7f, 12, 60);
+        //         }, 3);
+        //     }
+        // });
+        // AddEvent(0, new EN_Event { time = 0.5f, action = () => { StartCoroutine(Action.Straight_Move(new Vector3(EnableMoveX, Player.transform.position.y, EN_Data.BasePos.z), eventTime = 0.5f)); } });
+        // for (int i = 20; i > 0; i--) { int copy = i; AddEvent(0, new EN_Event { time = 0.15f, action = () => { Action.Move_Shot(EN_Data.BasePos, eventTime = 0f, () => { Action.CreateCircleSimultaneous(Blue, DirToTarget(Player.transform.position), EN_Data.EN_BulletSpeed_Nomal, EN_Data.EN_BulletSize_Nomal, copy / 3, 12); }, 1); } }); }//キャプチャ問題対策でcopy変数を作成 iをつかうと同じ変数であるため、最終的にi = 21となったiしか参照しない
+        // for (int i = 1; i <= 20; i++) { int copy = i; AddEvent(0, new EN_Event { time = 0.15f, action = () => { Action.Move_Shot(EN_Data.BasePos, eventTime = 0f, () => { Action.CreateCircleSimultaneous(Blue, DirToTarget(Player.transform.position), EN_Data.EN_BulletSpeed_Nomal, EN_Data.EN_BulletSize_Nomal, copy / 3, 12); }, 1); } }); }
+        AddEvent(0, new EN_Event { time = 1.0f, action = () => { Action.Move_Shot(EN_Data.BasePos, eventTime = 0f, () => { Action.CretateWave(Blue, DirToTarget(Player.transform.position), EN_Data.EN_BulletSpeed_Nomal, EN_Data.EN_BulletSize_Nomal, 45, 2.0f, 3f); }, 1); } });
         // for (int i = 11; i > 0; i -= 2) { int copy = i; }
 
         //--------------フェーズ1--------------
@@ -82,7 +83,7 @@ public class EN_Boss : Enemy
         AddEvent(2, new EN_Event { time = 1.0f, action = () => { StartCoroutine(Action.Straight_Move(new Vector3(-10f, EN_Data.BasePos.y, EN_Data.BasePos.z), eventTime = 0.5f)); } });
         AddEvent(2, new EN_Event { time = 0.0f, action = () => { Action.Move_Shot(new Vector3(10f, EN_Data.BasePos.y, EN_Data.BasePos.z), eventTime = 1.0f, () => { Action.CreateCircle(Circle_Parent, Blue, EN_Data.EN_BulletSpeed_Nomal, EN_Data.EN_BulletSize_Nomal * 0.8f, 5f, 8, 1.0f, 0.3f); }, 2); } });
         AddEvent(2, new EN_Event { time = 1.0f, action = () => { StartCoroutine(Action.Straight_Move(new Vector3(0f, -10f, EN_Data.BasePos.z), eventTime = 0.5f)); } });
-        AddEvent(2, new EN_Event { time = 1.0f, action = () => { Action.Move_Shot(new Vector3(0, 10, EN_Data.BasePos.z), eventTime = 8, () => { Action.CreateFan(Blue, this.transform.forward, EN_Data.EN_BulletSpeed_Low, EN_Data.EN_BulletSize_Nomal * 0.7f, 12, 60); }, 16); } });
+        AddEvent(2, new EN_Event { time = 1.0f, action = () => { Action.Move_Shot(new Vector3(0, 10, EN_Data.BasePos.z), eventTime = 0, () => { Action.CreateFan(Blue, this.transform.forward, EN_Data.EN_BulletSpeed_Low, EN_Data.EN_BulletSize_Nomal * 0.7f, 12, 60); }, 1); } });
     }
 
     protected override void Update()

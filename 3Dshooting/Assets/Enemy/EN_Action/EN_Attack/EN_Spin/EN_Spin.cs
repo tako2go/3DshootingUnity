@@ -24,7 +24,7 @@ public class EN_Spin : EN_Bullet
     // Update is called once per frame
     void Update()
     {
-        BulletVelocity = BulletDir.normalized * EN_BulletSpeed * Time.deltaTime;
+
         circleWaveMove();
         Bullethit();
         bulletDestroy();
@@ -32,7 +32,8 @@ public class EN_Spin : EN_Bullet
 
     void circleWaveMove()
     {
-        CenterPos += BulletVelocity;
+        BulletVelocity = BulletDir.normalized * EN_BulletSpeed;
+        CenterPos += BulletVelocity * Time.deltaTime;
         Angle += RotateSpeed * Time.deltaTime;
         Vector3 offset = Quaternion.AngleAxis(Angle, BulletDir.normalized) * Vector3.Cross(BulletDir, transform.up).normalized * CircleWaveRadius;
         //　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　↑
