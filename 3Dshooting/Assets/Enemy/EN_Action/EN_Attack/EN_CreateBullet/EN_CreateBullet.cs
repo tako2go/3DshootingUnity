@@ -65,7 +65,7 @@ public class EN_CreateBullet : MonoBehaviour
         parent.CircleShotInterval = shotInterval;
     }
 
-    public void CreateSpin(GameObject BulletType, Vector3 direction, float Speed, float size, float RotSpeed, float WaveRadius)
+    public void CreateSpin(GameObject BulletType, Vector3 direction, float Speed, float size, float RotSpeed, float SpinRadius)
     {
         GameObject CircleWaveBullet = Instantiate(BulletType, this.transform.position, Quaternion.identity);
         EN_Spin bullet = CircleWaveBullet.AddComponent<EN_Spin>();
@@ -73,7 +73,7 @@ public class EN_CreateBullet : MonoBehaviour
         bullet.EN_BulletSpeed = Speed;
         bullet.BulletSize = size;
         bullet.RotateSpeed = RotSpeed;
-        bullet.CircleWaveRadius = WaveRadius;
+        bullet.SpinRadius = SpinRadius;
     }
 
     public void CreateFan(GameObject BulletType, Vector3 direction, float Speed, float size, int bulletNum, float CneterDegree)//敵の位置から扇形のようにX-Z平面上に複数の弾が発射
