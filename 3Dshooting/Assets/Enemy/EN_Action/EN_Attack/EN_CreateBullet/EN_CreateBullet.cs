@@ -65,10 +65,10 @@ public class EN_CreateBullet : MonoBehaviour
         parent.CircleShotInterval = shotInterval;
     }
 
-    public void CreateCircleWave(GameObject BulletType, Vector3 directon, float Speed, float size, float RotSpeed, float WaveRadius)
+    public void CreateSpin(GameObject BulletType, Vector3 directon, float Speed, float size, float RotSpeed, float WaveRadius)
     {
         GameObject CircleWaveBullet = Instantiate(BulletType, this.transform.position, Quaternion.identity);
-        EN_CircleWave bullet = CircleWaveBullet.AddComponent<EN_CircleWave>();
+        EN_Spin bullet = CircleWaveBullet.AddComponent<EN_Spin>();
         bullet.BulletDir = directon;
         bullet.EN_BulletSpeed = Speed;
         bullet.BulletSize = size;

@@ -860,7 +860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EN_Tutorial: {fileID: 806409067590960209, guid: e2bfab81d9fca6b4daee9d3ce7cd2dd6, type: 3}
   EN_Mob: {fileID: 806409067590960209, guid: 0ed53f7e88b8ebc4686a178af56f8d0e, type: 3}
-  EN_Boss: {fileID: 0}
+  EN_Boss: {fileID: 806409067590960209, guid: e2bfab81d9fca6b4daee9d3ce7cd2dd6, type: 3}
   MobNum: 0
   MobTimer: 1
 --- !u!4 &1488750190
