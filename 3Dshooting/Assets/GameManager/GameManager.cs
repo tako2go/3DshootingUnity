@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     {
         Battle,//戦闘
         talk,//会話
+        Tutorial,//チュートリアルの操作受付
     }
     public enum BattlePhase
     {
@@ -27,11 +28,6 @@ public class GameManager : MonoBehaviour
 
         NowBattlePhase = BattlePhase.Boss_battle;
         EN_Manager.SpawnEnemy(EN_Manager.EN_Boss);
-    }
-
-    void Update()
-    {
-
     }
 
 }

@@ -11,4 +11,5 @@ public static class NumericalData
     public static int MoveBoxX = 30;//移動可能範囲(直径)
     public static int MoveBoxY = 15;
     public static int MoveBoxZ = 15;
+
 }

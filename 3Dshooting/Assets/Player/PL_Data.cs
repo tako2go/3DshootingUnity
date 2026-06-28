@@ -9,6 +9,7 @@ using UnityEngine.UIElements;
 public static class PL_Data
 {
     //プレイヤー情報
+    public static string PL_name = "こうさん";
     public static int PL_Speed = 10;
     //プレイヤーサイズ(円柱とする)
     public static float PL_Radius = 0.25f;//底面半径
