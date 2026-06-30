@@ -28,7 +28,7 @@ public class EN_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (GameManager.NowBattlePhase)
+        switch (GameManager.nowBattlePhase)
         {
             case GameManager.BattlePhase.middle_battle://中盤
                 MobTimer += Time.deltaTime;

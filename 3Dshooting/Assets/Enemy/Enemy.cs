@@ -28,22 +28,22 @@ public class Enemy : MonoBehaviour
     protected float timer = 0;
     protected float eventTime = 0;
 
-
+    private GameManager gameManager;
     protected virtual void Start()
     {
         Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         Action = this.GetComponent<EN_Action>();
-
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
     }
 
     protected virtual void Update()
     {
+        if (gameManager.nowGamePhase == GameManager.GamePhase.talk) return;//会話シーン中はストップ
+
         timer += Time.deltaTime;
-        // Debug.Log(eventCount);
         if (timer >= phase[now_phase].events[eventCount].time + eventTime)
         {
             phase[now_phase].events[eventCount].action?.Invoke();
-
             eventCount++;
             timer = 0;
             if (eventCount >= phase[now_phase].events.Count)

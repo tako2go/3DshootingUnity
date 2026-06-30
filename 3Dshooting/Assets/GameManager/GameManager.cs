@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
         Boss_battle,//ボス戦
     }
 
-    public BattlePhase NowBattlePhase;
+    public BattlePhase nowBattlePhase;
+    public GamePhase nowGamePhase;
     private EN_Manager EN_Manager;
     void Start()
     {
@@ -26,7 +27,8 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         EN_Manager = GameObject.FindWithTag("EN_Manager").GetComponent<EN_Manager>();
 
-        NowBattlePhase = BattlePhase.Boss_battle;
+        nowBattlePhase = BattlePhase.Boss_battle;
+        nowGamePhase = GamePhase.talk;
         EN_Manager.SpawnEnemy(EN_Manager.EN_Boss);
     }
 
