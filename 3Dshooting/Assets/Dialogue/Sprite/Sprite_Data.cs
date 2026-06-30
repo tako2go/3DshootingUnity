@@ -16,10 +16,7 @@ public enum charctor
     Player,
     pet,
     Boss,
-<<<<<<< Updated upstream
-=======
     none,//キャラクター以外
->>>>>>> Stashed changes
 }
 
 
