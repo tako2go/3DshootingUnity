@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
         Battle,//戦闘
         talk,//会話
         Tutorial,//チュートリアルの操作受付
+        CLEAR,
     }
     public enum BattlePhase
     {
@@ -20,16 +21,20 @@ public class GameManager : MonoBehaviour
 
     public BattlePhase nowBattlePhase;
     public GamePhase nowGamePhase;
-    private EN_Manager EN_Manager;
+    [SerializeField] private EN_Manager EN_Manager;
+    [SerializeField] private Dialogue_Manager dialogue_Manager;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        EN_Manager = GameObject.FindWithTag("EN_Manager").GetComponent<EN_Manager>();
 
         nowBattlePhase = BattlePhase.Boss_battle;
         nowGamePhase = GamePhase.talk;
         EN_Manager.SpawnEnemy(EN_Manager.EN_Boss);
+        dialogue_Manager.DialogueFinished += () =>//会話終了時に戦闘に戻す
+        {
+            nowGamePhase = GamePhase.Battle;
+        };
     }
 
 }

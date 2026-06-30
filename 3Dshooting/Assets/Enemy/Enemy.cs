@@ -81,6 +81,11 @@ public class Enemy : MonoBehaviour
     {
         phase[index].events.Add(Added_event);
     }
+
+    void PhaseForward()
+    {
+        now_phase++;
+    }
 }
 
 public class EN_Phase

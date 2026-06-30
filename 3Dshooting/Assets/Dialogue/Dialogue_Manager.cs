@@ -37,15 +37,18 @@ public class Dialogue_Manager : MonoBehaviour
             string speakerName = (speakertype == charctor.Player) ? PL_Data.PL_name : speakertype.ToString();//もしプレイヤーだったらプレイヤー名、それ以外だったらそのまま代入
             string line = dialogueSequence.lines[i].text;//セリフを取得
             Expression expression = dialogueSequence.lines[i].expression;//表情を取得
-                                                                         //表示テキスト変更
+
+            //表示テキスト変更
             Text_Name.text = speakerName;
             Text_line.text = line;
-            Debug.Log(sprite[speakertype].charctor[expression]);
             //左クリックをして、話すと次に進む
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
             yield return new WaitUntil(() => Input.GetMouseButtonUp(0));
         }
+        DialogueFinished?.Invoke();
     }
+
+    public event Action DialogueFinished;//会話終了時に実行する関数 phaseのインクリメントを敵側から実行
 
     private class sprite_charctor_expression
     {
