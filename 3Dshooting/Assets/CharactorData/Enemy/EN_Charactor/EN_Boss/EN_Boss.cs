@@ -1,12 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EN_Boss : Enemy
 {
-    EN_Manager EN_Manager;
-    [SerializeField] private Dialogue_Manager dialogue_Manager;
-
     //------------------ボスが生成するオブジェクト------------------
     [SerializeField] private GameObject Red;
     [SerializeField] private GameObject Blue;
@@ -16,15 +15,13 @@ public class EN_Boss : Enemy
     protected override void Start()
     {
         base.Start();
-        EN_Manager = GameObject.FindWithTag("EN_Manager").GetComponent<EN_Manager>();
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         EN_MaxHP = 300; EN_HP = EN_MaxHP;
-        Dialogue_Manager dialogue_Manager = GameObject.FindWithTag("Dialogue_Manager").GetComponent<Dialogue_Manager>();
-        dialogue_Manager.DialogueFinished += () => now_phase++;//会話終了時にphaseをインクリメント
         //----------------------敵行動----------------------
         //書き方:new EN_Event{ time = 実行する時間,action = () = >{実行する関数};}}
         phase = new List<EN_Phase>();
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             phase.Add(new EN_Phase());
         }
@@ -99,39 +96,34 @@ public class EN_Boss : Enemy
     protected override void Update()
     {
         base.Update();
-        if ((float)EN_HP / EN_MaxHP <= (1.0f / 3))
+        float HP_ratio = (float)EN_HP / EN_MaxHP;
+        //---------------体力によってphase変化---------------
+        if (HP_ratio <= (1.0f / 3))
         {
-            if (now_phase != 2)
-            {
-                now_phase = 2;
-                eventCount = 0;
-            }
-
+            if (now_phase != 2) NextPhase();
         }
-        else if ((float)EN_HP / EN_MaxHP <= (2.0f / 3))
+        else if (HP_ratio <= (2.0f / 3))
         {
-            if (now_phase != 1)
-            {
-                now_phase = 1;
-                eventCount = 0;
-            }
-        }
-        else if ((float)EN_HP / EN_MaxHP <= (3f / 3))
-        {
-            if (now_phase != 0)
-            {
-                now_phase = 0;
-                eventCount = 0;
-            }
+            if (now_phase != 1) NextPhase();
         }
 
         if (EN_HP <= 0)
         {
-            Destroy(this.gameObject);
+            if (now_phase != 3) BossDead();
         }
     }
 
-
-
-
+    void NextPhase()
+    {
+        now_phase++;
+        eventCount = 0;
+        gameManager.nowGamePhase = GameManager.GamePhase.talk;
+        StartCoroutine(dialogue_Manager.DialogueForward(now_phase));
+    }
+    void BossDead()//ボス討伐時実行
+    {
+        now_phase++;
+        gameManager.nowGamePhase = GameManager.GamePhase.talk;
+        StartCoroutine(dialogue_Manager.DialogueForward(now_phase));
+    }
 }

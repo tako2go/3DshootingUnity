@@ -8,6 +8,7 @@ TagManager:
   - EN_Manager
   - GameManager
   - PL_Bullet
+  - Dialogue_Manager
   layers:
   - Default
   - TransparentFX

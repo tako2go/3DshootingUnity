@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc973b4710b24004ab4b690daf65f6a1, type: 3}
   m_Name: Pet_Sprite
   m_EditorClassIdentifier: 
-  sprite_Data_Charctors: []
+  sprite_Data_Charctors:
+  - expression: 0
+    sprite_charctor: {fileID: 21300000, guid: 26d4f9897224c464082130f741fd9807, type: 3}
+  - expression: 5
+    sprite_charctor: {fileID: 21300000, guid: 30bbf78127fad6d438fae23d1c7e82f4, type: 3}

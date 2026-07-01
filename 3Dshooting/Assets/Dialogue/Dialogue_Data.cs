@@ -6,9 +6,13 @@ using UnityEngine;
 
 
 [CreateAssetMenu(menuName = "Dialogue/DialogueData")]
-public class Dialogue_Data : ScriptableObject
+public class Dialogue_Data : ScriptableObject//最大の単位
 {
-    public Dialogue_group Dialogue_Group;
+    [SerializeField] public Dialogue_group Dialogue_Group;
+    //-------------------------会話中に誰がどこにいるか-------------------------
+    [SerializeField] public Charactor_Data.charctor sprite_right;
+    [SerializeField] public Charactor_Data.charctor sprite_left;
+    [SerializeField] public Charactor_Data.charctor sprite_dalia;
 }
 
 
@@ -18,9 +22,9 @@ public class Dialogue_Data : ScriptableObject
 public class Dialogue_line
 {
     [SerializeField, Header("発言者")]
-    public charctor speaker;
+    public Charactor_Data.charctor speaker;
     [SerializeField, Header("表情")]
-    public Expression expression;
+    public Charactor_Data.Expression expression;
     [SerializeField, Header("発言内容")]
     [TextArea]
     public string text;
@@ -38,4 +42,3 @@ public class Dialogue_group
 {
     public List<DialogueSequence> DialogueSequence;
 }
-

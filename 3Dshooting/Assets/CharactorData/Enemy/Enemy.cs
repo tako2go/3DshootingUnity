@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Security;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -28,12 +29,14 @@ public class Enemy : MonoBehaviour
     protected float timer = 0;
     protected float eventTime = 0;
 
-    private GameManager gameManager;
+    protected GameManager gameManager;
+    protected Dialogue_Manager dialogue_Manager;
     protected virtual void Start()
     {
         Player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         Action = this.GetComponent<EN_Action>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        dialogue_Manager = GameObject.FindWithTag("Dialogue_Manager").GetComponent<Dialogue_Manager>();
     }
 
     protected virtual void Update()
@@ -41,6 +44,7 @@ public class Enemy : MonoBehaviour
         if (gameManager.nowGamePhase == GameManager.GamePhase.talk) return;//会話シーン中はストップ
 
         timer += Time.deltaTime;
+        if (phase[now_phase].events.Count <= eventCount) return;
         if (timer >= phase[now_phase].events[eventCount].time + eventTime)
         {
             phase[now_phase].events[eventCount].action?.Invoke();
@@ -80,11 +84,6 @@ public class Enemy : MonoBehaviour
     protected void AddEvent(int index, EN_Event Added_event)//index:phase Added_event:行動
     {
         phase[index].events.Add(Added_event);
-    }
-
-    void PhaseForward()
-    {
-        now_phase++;
     }
 }
 

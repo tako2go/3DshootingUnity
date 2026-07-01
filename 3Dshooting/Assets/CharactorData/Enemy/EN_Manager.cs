@@ -18,7 +18,6 @@ public class EN_Manager : MonoBehaviour
     public float MobTimer = EN_Data.MobApperTime;//雑魚敵が死んでから経った時間
 
     //------------ボス戦---------------
-    bool BossFlag = false;
 
     void Start()
     {

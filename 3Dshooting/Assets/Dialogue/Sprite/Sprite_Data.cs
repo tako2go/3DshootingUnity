@@ -11,20 +11,3 @@ public class Sprite_Data : ScriptableObject
     public Sprite_Data_charctor pet;
 }
 
-public enum charctor
-{
-    Player,
-    pet,
-    Boss,
-    none,//キャラクター以外
-}
-
-
-public enum Expression
-{
-    Normal,
-    fine,
-    Smile,
-    Angry,
-    frightened,
-}
